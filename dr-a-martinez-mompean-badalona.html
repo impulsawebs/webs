@@ -10,11 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --brand: #2563EB;
-    --brand-dark: #1d4db7;
-    --brand-tint: #e5ecfd;
-    --brand-deep: #2159d4;
-    --brand-soft: color-mix(in srgb, #2563EB 55%, #FFFFFF);
+    --brand: #4F46E5;
+    --brand-dark: #3e37b3;
+    --brand-tint: #eae9fc;
+    --brand-deep: #473fce;
+    --brand-soft: color-mix(in srgb, #4F46E5 55%, #FFFFFF);
     --ink: #16140F;
     --paper: #FBF9F5;
     --void: #0B0A08;
@@ -423,7 +423,7 @@
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="spotlight" id="spotlight" aria-hidden="true"></div>
     <div class="hero-inner" id="heroInner">
-      <span class="eyebrow">Tu dentista de confianza · Badalona</span>
+      <span class="eyebrow">Clínica dental en Badalona</span>
       <h1><span class="reveal-line"><span class="word " style="animation-delay:0.000s">Sonríe</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.055s">con</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.110s">confianza</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.165s">en</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.220s">Badalona</span></span></h1>
       <p class="lead">Llevamos años cuidando las sonrisas de Badalona con un equipo que se implica de verdad.</p>
       <div class="hero-cta">
@@ -695,8 +695,8 @@
     function mat4RotateX(r){var c=Math.cos(r),s=Math.sin(r);return[1,0,0,0,0,c,s,0,0,-s,c,0,0,0,0,1];}
     function mat4Translate(x,y,z){return[1,0,0,0,0,1,0,0,0,0,1,0,x,y,z,1];}
 
-    var brand = hexToVec3('#2563EB');
-    var brandSoft = hexToVec3('#e5ecfd');
+    var brand = hexToVec3('#4F46E5');
+    var brandSoft = hexToVec3('#eae9fc');
 
     // Fibonacci sphere point cloud
     var N = 1600, pos = new Float32Array(N*3), rnd = new Float32Array(N);

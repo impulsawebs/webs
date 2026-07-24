@@ -10,10 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --brand: #0F766E;
-    --brand-dark: #0c5c56;
-    --brand-deep: #0e6a63;
-    --brand-abyss: #04211f;
+    --brand: #4F46E5;
+    --brand-dark: #3e37b3;
+    --brand-deep: #473fce;
+    --brand-abyss: #161440;
     --paper: #F4F0E7;
     --paper-2: #EAE4D6;
     --ink: #17140D;
@@ -260,9 +260,9 @@
   <section class="hero" id="heroSection">
     <canvas class="hero-blob" id="heroBlob" aria-hidden="true"></canvas>
     <div class="hero-inner">
-      <span class="eyebrow">Clínica dental en La Carlota</span>
-      <h1><span class="reveal-line"><span class="word " style="animation-delay:0.000s">Sonríe</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.055s">con</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.110s">confianza</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.165s">en</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.220s">La</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.275s">Carlota</span></span></h1>
-      <p class="lead">En Clinica Dental las Escalonias tratamos cada sonrisa como si fuera la nuestra: sin prisas, sin sorpresas y con la última tecnología.</p>
+      <span class="eyebrow">Tu dentista de confianza · La Carlota</span>
+      <h1><span class="reveal-line"><span class="word " style="animation-delay:0.000s">Tu</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.055s">mejor</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.110s">sonrisa</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.165s">empieza</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.220s">en</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.275s">La</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.330s">Carlota</span></span></h1>
+      <p class="lead">Si el dentista te da respeto, aquí vas a estar tranquilo: te acompañamos paso a paso y sin dolor.</p>
       <div class="hero-cta">
         <a class="btn" id="magneticCta" href="#contacto">Pide tu cita gratuita</a>
         <a class="btn btn-ghost" href="tel:+34957302121">Llamar ahora</a>
@@ -422,7 +422,7 @@
   (function initBlob(){
     var canvas = document.getElementById('heroBlob'); if(!canvas) return;
     var ctx = canvas.getContext('2d'); if(!ctx) return;
-    var A = '#0F766E', B = '#0e6a63';
+    var A = '#4F46E5', B = '#473fce';
     var dpr = Math.min(devicePixelRatio||1, 2), W=0, H=0, lastW=-1, lastH=-1;
     function rs(){ W=canvas.clientWidth|0; H=canvas.clientHeight|0; if(W!==lastW||H!==lastH){ canvas.width=W*dpr; canvas.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); lastW=W; lastH=H; } }
     window.addEventListener('resize', rs);
