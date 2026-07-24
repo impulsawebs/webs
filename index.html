@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impulsa Webs · Vistas previas de clínicas</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { --bg:#0b0d12; --panel:#151922; --ink:#f4f6fb; --muted:#98a2b3; --line:rgba(255,255,255,.08); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+  header { padding:56px 24px 28px; max-width:1180px; margin:0 auto; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.22em; font-size:12px; font-weight:700; color:var(--muted); }
+  h1 { font-size:clamp(28px,5vw,44px); line-height:1.05; margin:14px 0 10px; font-weight:800; letter-spacing:-.02em; }
+  .sub { color:var(--muted); font-size:16px; max-width:640px; }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 0; }
+  .filters button { background:var(--panel); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:9px 16px; font-size:13px; font-weight:600; cursor:pointer; transition:.18s; }
+  .filters button.active { background:var(--ink); color:#0b0d12; border-color:var(--ink); }
+  main { max-width:1180px; margin:0 auto; padding:28px 24px 80px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; }
+  .card { text-decoration:none; color:inherit; background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden; transition:transform .2s, box-shadow .2s, border-color .2s; display:block; }
+  .card:hover { transform:translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,.45); border-color:color-mix(in srgb, var(--c) 60%, transparent); }
+  .thumb { height:150px; background:radial-gradient(120% 140% at 78% 30%, var(--c), var(--c2) 70%, #05060a); position:relative; }
+  .thumb::after { content:""; position:absolute; inset:0; background:radial-gradient(60% 60% at 80% 35%, rgba(255,255,255,.28), transparent 60%); mix-blend-mode:screen; }
+  .badge { position:absolute; top:12px; left:12px; z-index:1; width:30px; height:30px; border-radius:8px; background:rgba(0,0,0,.35); backdrop-filter:blur(4px); color:#fff; font-weight:800; font-size:14px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.25); }
+  .meta { padding:16px 18px 20px; }
+  .meta h3 { margin:0 0 4px; font-size:16px; font-weight:700; letter-spacing:-.01em; }
+  .meta p { margin:0; color:var(--muted); font-size:13px; }
+  footer { text-align:center; color:var(--muted); font-size:13px; padding:0 24px 60px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Impulsa Webs</div>
+    <h1>Vistas previas de clínicas</h1>
+    <p class="sub">36 clínicas dentales sin web, cada una con su propia web de muestra: distinto estilo, color y textos. Pulsa cualquiera para abrirla.</p>
+    <div class="filters">
+      <button data-f="all" class="active">Todas · 36</button>
+      <button data-f="A">Estilo A</button>
+      <button data-f="B">Estilo B</button>
+      <button data-f="C">Estilo C</button>
+    </div>
+  </header>
+  <main>
+    <div class="grid" id="grid">
+      <a class="card" href="./clinica-dental-la-cavada-la-cavada.html" data-arch="A" style="--c:#C026D3;--c2:#6a1574">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Clínica dental La Cavada</h3>
+          <p>La Cavada · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-dr-de-la-torre-jaen.html" data-arch="C" style="--c:#C026D3;--c2:#6a1574">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Dr. de la Torre</h3>
+          <p>Jaén · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-dentzarzosa-santander.html" data-arch="C" style="--c:#C026D3;--c2:#6a1574">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clínica dental Dentzarzosa</h3>
+          <p>Santander · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./juan-luis-de-la-hoz-parrondo-madrid.html" data-arch="C" style="--c:#4F46E5;--c2:#2b277e">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Juan Luis de la Hoz Parrondo</h3>
+          <p>Madrid · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-alaro-alaro.html" data-arch="A" style="--c:#DB2777;--c2:#781541">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Alaró</h3>
+          <p>Alaro · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./teeth-tooth-girona.html" data-arch="B" style="--c:#E11D48;--c2:#7c1028">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Teeth &amp; Tooth</h3>
+          <p>Girona · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./dentista-antonio-baena-janini-girona.html" data-arch="A" style="--c:#059669;--c2:#03533a">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Dentista Antonio Baena Janini</h3>
+          <p>Girona · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./dentimar-vilassar-de-mar.html" data-arch="A" style="--c:#0E7490;--c2:#08404f">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Dentimar</h3>
+          <p>Vilassar de Mar · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./dr-pujals-l-hospitalet-de-llobregat.html" data-arch="A" style="--c:#0E7490;--c2:#08404f">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Dr. Pujals</h3>
+          <p>L'Hospitalet de Llobregat · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./dr-a-martinez-mompean-badalona.html" data-arch="C" style="--c:#4F46E5;--c2:#2b277e">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Dr. A. Martínez Mompeán</h3>
+          <p>Badalona · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./dental-bless-badalona.html" data-arch="B" style="--c:#2563EB;--c2:#143681">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Dental Bless</h3>
+          <p>Badalona · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./ident-clinical-dental-badalona.html" data-arch="B" style="--c:#E11D48;--c2:#7c1028">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>iDent Clinical Dental</h3>
+          <p>Badalona · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-justa-saiz-vic.html" data-arch="A" style="--c:#0891B2;--c2:#045062">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Justa Saiz</h3>
+          <p>Vic · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-san-antonio-cabrerizos.html" data-arch="A" style="--c:#0891B2;--c2:#045062">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Clínica Dental San Antonio</h3>
+          <p>Cabrerizos · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-pompeia-badalona.html" data-arch="A" style="--c:#0891B2;--c2:#045062">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Clínica dental Pompeia</h3>
+          <p>Badalona · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./doctora-isabel-campoy-santiago-de-compostela.html" data-arch="C" style="--c:#D97706;--c2:#774103">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Doctora Isabel Campoy</h3>
+          <p>Santiago de Compostela · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./centre-dental-montbui-santa-margarida-de-montbui.html" data-arch="B" style="--c:#0D9488;--c2:#07514b">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Centre Dental Montbui</h3>
+          <p>Santa Margarida de Montbui · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./pere-guillen-tarragona.html" data-arch="C" style="--c:#0E7490;--c2:#08404f">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Pere Guillén</h3>
+          <p>Tarragona · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-dr-sendin-vitigudino.html" data-arch="B" style="--c:#4F46E5;--c2:#2b277e">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Dr. Sendín</h3>
+          <p>Vitigudino · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-eurodent-penafiel.html" data-arch="B" style="--c:#4F46E5;--c2:#2b277e">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Clínica Eurodent</h3>
+          <p>Peñafiel · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-j-serra-santa-coloma-de-gramenet.html" data-arch="B" style="--c:#D97706;--c2:#774103">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Clínica J. Serra</h3>
+          <p>Santa Coloma de Gramenet · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-el-carmen-madrid.html" data-arch="C" style="--c:#1D4ED8;--c2:#102b77">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clínica dental El Carmen</h3>
+          <p>Madrid · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-covadonga-torrelavega.html" data-arch="C" style="--c:#9333EA;--c2:#511c81">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Covadonga</h3>
+          <p>Torrelavega · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./rafael-torres-sanchez-atarfe.html" data-arch="B" style="--c:#C026D3;--c2:#6a1574">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Rafael Torres Sánchez</h3>
+          <p>Atarfe · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-mare-de-deu-del-port-barcelona.html" data-arch="C" style="--c:#0F766E;--c2:#08413d">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Mare de Déu del Port</h3>
+          <p>Barcelona · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./dr-carlos-bruscantini-angles.html" data-arch="A" style="--c:#0E7490;--c2:#08404f">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Dr.Carlos Bruscantini</h3>
+          <p>Anglès · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./doctor-miguel-ruiz-iranda-albolote.html" data-arch="B" style="--c:#DB2777;--c2:#781541">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Doctor Miguel Ruiz Iranda</h3>
+          <p>Albolote · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-carrillo-rodriguez-santander.html" data-arch="B" style="--c:#1D4ED8;--c2:#102b77">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Clínica dental Carrillo Rodríguez</h3>
+          <p>Santander · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-raul-estevez-camino-baga.html" data-arch="C" style="--c:#0E7490;--c2:#08404f">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clínica dental Raúl Estévez Camino</h3>
+          <p>Bagà · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-las-escalonias-la-carlota.html" data-arch="B" style="--c:#4F46E5;--c2:#2b277e">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Clinica Dental las Escalonias</h3>
+          <p>La Carlota · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-sant-cristofol-manresa.html" data-arch="A" style="--c:#0D9488;--c2:#07514b">
+        <div class="thumb"><span class="badge">A</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Sant Cristòfol</h3>
+          <p>Manresa · Oscuro 3D · alambre</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-rafael-moreno-avila-onda.html" data-arch="B" style="--c:#D97706;--c2:#774103">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Rafael Moreno Ávila</h3>
+          <p>Onda · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-doctora-marta-vazquez-losada-a-fonsagrada.html" data-arch="B" style="--c:#6D28D9;--c2:#3c1677">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Clínica Dental Doctora Marta Vázquez Losada</h3>
+          <p>A Fonsagrada · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./pedro-lopez-bastida-cehegin.html" data-arch="B" style="--c:#0F766E;--c2:#08413d">
+        <div class="thumb"><span class="badge">B</span></div>
+        <div class="meta">
+          <h3>Pedro López Bastida</h3>
+          <p>Cehegín · Claro editorial · líquido</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-prado-de-san-roque-santander.html" data-arch="C" style="--c:#1D4ED8;--c2:#102b77">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clinica Dental Prado de San Roque</h3>
+          <p>Santander · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+      <a class="card" href="./clinica-dental-arce-y-sheligo-santander.html" data-arch="C" style="--c:#E11D48;--c2:#7c1028">
+        <div class="thumb"><span class="badge">C</span></div>
+        <div class="meta">
+          <h3>Clínica dental Arce y Sheligo</h3>
+          <p>Santander · Oscuro 3D · partículas</p>
+        </div>
+      </a>
+    </div>
+  </main>
+  <footer>Generado automáticamente · sin coste de API</footer>
+  <script>
+    var btns = document.querySelectorAll('.filters button');
+    var cards = document.querySelectorAll('.card');
+    btns.forEach(function(b){ b.addEventListener('click', function(){
+      btns.forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      var f = b.getAttribute('data-f');
+      cards.forEach(function(c){ c.classList.toggle('hidden', f !== 'all' && c.getAttribute('data-arch') !== f); });
+    }); });
+  </script>
+</body>
+</html>
