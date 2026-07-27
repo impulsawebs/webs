@@ -7,7 +7,7 @@
 <meta name="description" content="Clínica Dental Rafael Moreno Ávila: Odontología general y estética dental en Onda. Pide tu cita." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="../fonts/pair-1.css" rel="stylesheet" />
+<link href="../../fonts/pair-1.css" rel="stylesheet" />
 <style>
   :root {
     --brand: #D97706;
@@ -270,8 +270,8 @@
     <nav class="links">
       <a href="index.html">Inicio</a>
       <a href="servicios.html">Tratamientos</a>
-      <a href="la-clinica.html">La clínica</a>
-      <a href="contacto.html" class="current">Contacto</a>
+      <a href="la-clinica.html" class="current">La clínica</a>
+      <a href="contacto.html">Contacto</a>
     </nav>
     <div class="nav-actions">
       <a class="btn btn-ghost" href="tel:+34964604640">+34964604640</a>
@@ -282,60 +282,67 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Inicio</a>
       <a href="servicios.html">Tratamientos</a>
-      <a href="la-clinica.html">La clínica</a>
-      <a href="contacto.html" class="current">Contacto</a>
+      <a href="la-clinica.html" class="current">La clínica</a>
+      <a href="contacto.html">Contacto</a>
   </div>
 </header>
 
 <main id="top">
     <section class="page-head">
     <div class="container">
-      <span class="eyebrow">Contacto</span>
-      <h1>Pide tu cita</h1>
-      <p class="lead">Llámanos, escríbenos por WhatsApp o déjanos tu consulta. Estamos en Onda.</p>
+      <span class="eyebrow">La clínica</span>
+      <h1>Cerca de ti, en Onda</h1>
+      <p class="lead">Clínica Dental Rafael Moreno Ávila trabaja con una idea simple: explicarte lo que necesitas, sin tecnicismos y sin sorpresas en el presupuesto.</p>
     </div>
   </section>
 
-  <section class="container" style="padding-bottom:4rem">
-    <div class="contact-grid" data-reveal="stagger">
-      <div class="contact-card">
-        <span class="k">Teléfono</span>
-        <a class="v" href="tel:+34964604640">+34964604640</a>
-        <p>Te atendemos y resolvemos tus dudas sin compromiso.</p>
+  <div class="ticker-band">
+    <div class="container ticker" data-reveal="stagger">
+      <div><div class="ticker-num">Sin compromiso</div><div class="ticker-label">Primera visita para valorarte y explicarte, sin presión.</div></div>
+      <div><div class="ticker-num">Precio cerrado</div><div class="ticker-label">Presupuesto por escrito antes de empezar. Sin sorpresas.</div></div>
+      <div><div class="ticker-num">Trato cercano</div><div class="ticker-label">Te lo contamos claro, sin tecnicismos.</div></div>
+    </div>
+  </div>
+
+  <section id="nosotros">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow" style="margin-bottom:.9rem;justify-content:center;">Nuestro compromiso</span>
+        <h2>Por qué elegirnos</h2>
       </div>
-      <div class="contact-card">
-        <span class="k">WhatsApp</span>
-        <a class="v" href="https://wa.me/34964604640" target="_blank" rel="noopener">Escríbenos</a>
-        <p>¿Prefieres escribir? Te contestamos por WhatsApp.</p>
-      </div>
-      <div class="contact-card">
-        <span class="k">Dónde estamos</span>
-        <span class="v">Onda</span>
-        <p>Clínica Dental Rafael Moreno Ávila — en el centro de Onda.</p>
-      </div>
-      <div class="contact-card">
-        <span class="k">Primera visita</span>
-        <span class="v">Sin compromiso</span>
-        <p>Te valoramos, te explicamos y te damos presupuesto cerrado.</p>
+      <div class="quote-trio" data-reveal="stagger">
+        <div class="qcard">
+          <p>Presupuesto cerrado y por escrito antes de empezar.</p>
+          <div class="who">Sin sorpresas</div>
+        </div>
+        <div class="qcard">
+          <p>Buscamos hueco cuanto antes; urgencias el mismo día siempre que se pueda.</p>
+          <div class="who">Cita rápida</div>
+        </div>
+        <div class="qcard">
+          <p>Entiendes qué necesitas y por qué, sin tecnicismos.</p>
+          <div class="who">Claridad</div>
+        </div>
       </div>
     </div>
-    <form class="wa-form" data-reveal onsubmit="return sendWa(event)">
-      <input id="waName" type="text" placeholder="Tu nombre" required />
-      <textarea id="waMsg" placeholder="Cuéntanos qué necesitas y te decimos cómo te ayudamos." required></textarea>
-      <button class="btn" type="submit">Enviar por WhatsApp</button>
-    </form>
-    <script>
-      function sendWa(e){ e.preventDefault();
-        var n=document.getElementById('waName').value, m=document.getElementById('waMsg').value;
-        window.open('https://wa.me/34964604640?text='+encodeURIComponent('Hola, soy '+n+'. '+m),'_blank');
-        return false; }
-    </script>
+  </section>
+
+  <section id="nosotros" class="quote-section">
+    <div class="container">
+      <div class="quote-wrap" data-reveal>
+        <span class="quote-mark">"</span>
+        <div>
+          <blockquote>Tratamos a cada persona como nos gustaría que nos tratasen a nosotros: con tiempo, honestidad y un plan claro desde el principio.</blockquote>
+          <div class="quote-source">El equipo de Clínica Dental Rafael Moreno Ávila</div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="contacto" class="finale">
     <div class="container" data-reveal>
       <span class="eyebrow" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
-      <h2>¿Hablamos?</h2>
+      <h2>Estamos aquí para ayudarte</h2>
       <div><a class="tel-giant" href="tel:+34964604640">+34964604640</a></div>
       <div class="finale-meta">
         <span>Clínica Dental Rafael Moreno Ávila</span><span class="sep">●</span>
