@@ -9,7 +9,8 @@
 <script type="importmap">
 { "imports": {
   "three": "../vendor/three/three.module.js",
-  "three/addons/": "../vendor/three/"
+  "three/addons/": "../vendor/three/",
+  "impulsa/": "../vendor/impulsa/"
 } }
 </script>
 <style>
@@ -72,9 +73,10 @@
      La página no "aparece": se presenta. Dos barras que se abren
      y el nombre de la clínica. Dura poco más de un segundo. */
   .f-intro { position:fixed; inset:0; z-index:200; display:grid; place-items:center;
-    background:var(--ink); pointer-events:none; }
-  .f-intro-name { font-family:var(--font-display); font-size:clamp(1.4rem,4vw,2.6rem);
-    color:#fff; letter-spacing:-.02em; overflow:hidden; }
+    pointer-events:none; }
+  .f-intro-name { position:relative; z-index:3; font-family:var(--font-display);
+    font-size:clamp(1.4rem,4vw,2.6rem); color:#fff; letter-spacing:-.02em;
+    overflow:hidden; padding:.15em .1em .25em; }
   .f-intro-name span { display:inline-block; transform:translateY(105%);
     animation:fIntroUp .8s cubic-bezier(.16,1,.3,1) .15s forwards; }
   .f-intro::before, .f-intro::after { content:''; position:absolute; left:0; right:0; height:50%;
@@ -134,7 +136,23 @@
     color:#fff; overflow:hidden; padding:8rem 0 5rem; }
   .hero-bg { position:absolute; inset:0; z-index:0; }
   .hero-bg canvas { position:absolute; inset:0; width:100%; height:100%; }
+  /* La pieza queda DETRÁS del titular centrado: sin este velo el texto se
+     pierde sobre el esmalte blanco. */
+  .hero-veil { position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(ellipse 64% 50% at 50% 46%, rgba(6,7,9,.72), rgba(6,7,9,.26) 70%, transparent 100%); }
   .hero-inner { position:relative; z-index:2; max-width:820px; padding:0 2rem; }
+  /* Entra escalonado y después de la cortina; el motor de scroll toca
+     .hero-inner, así que la animación va en los hijos. */
+  .hero-inner > * { opacity:0; animation:heroUp .9s cubic-bezier(.16,1,.3,1) forwards; }
+  .hero-inner > *:nth-child(1) { animation-delay:2.25s; }
+  .hero-inner > *:nth-child(2) { animation-delay:2.40s; }
+  .hero-inner > *:nth-child(3) { animation-delay:2.55s; }
+  .hero-inner > *:nth-child(4) { animation-delay:2.70s; }
+  .hero-inner > *:nth-child(5) { animation-delay:2.85s; }
+  @keyframes heroUp { from { transform:translateY(22px); } to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-inner > * { opacity:1; animation:none; }
+  }
   .hero .f-pill { border-color:var(--line-l); color:rgba(255,255,255,.8); backdrop-filter:blur(8px);
     background:rgba(255,255,255,.06); }
   .hero h1 { margin-top:1.8rem; font-size:clamp(2.4rem, 6.2vw, 5.4rem); line-height:1.02;
@@ -518,13 +536,20 @@
 </script>
 
 <script type="module">
-// La misma pieza 3D del arquetipo E, aquí a pantalla completa detrás del
-// titular: se construye extruyendo el SVG del icono de la especialidad.
+// ===========================================================================
+// PORTADA 3D — la pieza aparece de frente, CENTRADA, y se va al fondo dando
+// una vuelta completa, para que se vea por los cuatro costados.
+//
+// La geometría no es el SVG extruido (eso era una chapa plana con bisel): en
+// dental se construye un molar de verdad — corona con cuello, sección más
+// ancha que profunda, cuatro cúspides y dos raíces. Ver lib/pieza3d.js.
+// ===========================================================================
 import * as THREE from 'three';
-import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import { construirMallas } from 'impulsa/pieza3d.js';
 
 const host = document.getElementById('heroBg');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ES_DENTAL = true;
 const SVG_ICONO = `<svg viewBox="0 0 24 24" stroke-width="0.18" aria-hidden="true"><path d="M12 4.2c-1.7-1.2-4.8-1.6-6.2.9-1.5 2.5-.3 5.2.5 7.5.8 2.4 1.1 5.4 1.9 7.4.4 1 1.8 1 2.1-.1.4-1.5.6-3.5 1.7-3.5s1.3 2 1.7 3.5c.3 1.1 1.7 1.1 2.1.1.8-2 1.1-5 1.9-7.4.8-2.3 2-5 .5-7.5-1.4-2.5-4.5-2.1-6.2-.9z"/><path d="M9.4 7.4c-.8.3-1.4 1-1.6 1.9"/></svg>`;
 if (host) arrancar();
 
@@ -544,80 +569,60 @@ function arrancar() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, w / h, 0.1, 400);
 
+  // Estudio en miniatura -> mapa de reflejos. Es lo que hace que el esmalte
+  // parezca esmalte y no plástico plano.
   const pmrem = new THREE.PMREMGenerator(renderer);
   const env = new THREE.Scene();
-  const panel = (c, x, y, z, s, rx, ry) => {
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(s, s),
+  const panel = (c, x, y, z, sz, rx, ry) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(sz, sz),
       new THREE.MeshBasicMaterial({ color:c, side:THREE.DoubleSide }));
     m.position.set(x, y, z); m.rotation.set(rx, ry, 0); env.add(m);
   };
   panel(0xffffff, 0, 60, 0, 170, Math.PI/2, 0);
-  panel(0xdfe3e6, -60, 0, 0, 150, 0, Math.PI/2);
+  panel(0xe6e9ec, -60, 0, 0, 150, 0, Math.PI/2);
   panel(0x9aa0a6, 60, 0, 0, 150, 0, -Math.PI/2);
-  panel(0x2a2d30, 0, -60, 0, 170, -Math.PI/2, 0);
+  panel(0x24272a, 0, -60, 0, 170, -Math.PI/2, 0);
   scene.environment = pmrem.fromScene(env, 0.05).texture;
 
   const brand = new THREE.Color('#E11D48');
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(-26, 28, 36); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffffff, 2.2); rim.position.set(30, 8, -22); scene.add(rim);
-  const tint = new THREE.DirectionalLight(brand, 1.6); tint.position.set(-10, -20, 18); scene.add(tint);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const key = new THREE.DirectionalLight(0xffffff, 2.5); key.position.set(-24, 26, 34); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffffff, 2.0); rim.position.set(28, 6, -24); scene.add(rim);
+  const tint = new THREE.DirectionalLight(brand, 2.0); tint.position.set(16, -14, -10); scene.add(tint);
 
   const material = new THREE.MeshPhysicalMaterial({
-    color:0xF2F0EC, roughness:0.3, metalness:0.0,
-    clearcoat:1.0, clearcoatRoughness:0.18, envMapIntensity:1.2,
+    color:0xF7F5F1, roughness:0.26, metalness:0.0,
+    clearcoat:1.0, clearcoatRoughness:0.14, envMapIntensity:1.25,
   });
 
   const group = new THREE.Group();
-  new SVGLoader().parse(SVG_ICONO).paths.forEach((path) => {
-    path.subPaths.forEach((sub) => {
-      const pts = sub.getPoints(72).map(p => new THREE.Vector2(p.x, -p.y));
-      if (pts.length < 3) return;
-      let geo;
-      if (pts[0].distanceTo(pts[pts.length - 1]) < 0.6) {
-        geo = new THREE.ExtrudeGeometry(new THREE.Shape(pts), {
-          depth:3.4, bevelEnabled:true, bevelThickness:0.5, bevelSize:0.42,
-          bevelSegments:5, curveSegments:20,
-        });
-        geo.translate(0, 0, -1.7);
-      } else {
-        const curve = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(p.x, p.y, 0)));
-        geo = new THREE.TubeGeometry(curve, Math.max(24, pts.length), 0.42, 12, false);
-      }
-      group.add(new THREE.Mesh(geo, material));
-    });
-  });
+  // Cada parte con su material: esmalte translúcido en la corona, cemento
+  // opaco y mate en las raíces. Con un solo material las raíces salían de
+  // cristal.
+  construirMallas(ES_DENTAL, SVG_ICONO).forEach((m) => group.add(m));
   if (!group.children.length) { renderer.dispose(); return; }
 
+  // Centrar en su propio volumen y normalizar altura a 1.
   const box = new THREE.Box3().setFromObject(group);
   const c = box.getCenter(new THREE.Vector3());
-  group.children.forEach(m => m.geometry.translate(-c.x, -c.y, -c.z));
-  const span = Math.max(box.max.x - box.min.x, box.max.y - box.min.y) || 1;
+  group.children.forEach((m) => m.geometry.translate(-c.x, -c.y, -c.z));
+  const alto = (box.max.y - box.min.y) || 1;
 
   const pivot = new THREE.Group(); pivot.add(group);
-  pivot.scale.setScalar(30 / span);
   const rig = new THREE.Group(); rig.add(pivot); scene.add(rig);
 
-  // Encuadre: la pieza vive DETRÁS del texto, así que se dimensiona y se
-  // coloca a partir del área realmente visible a esa distancia. Si se fija a
-  // ojo, en pantallas anchas queda centrada encima del titular y no se lee.
+  // La pieza vive CENTRADA: se dimensiona respecto al alto visible.
   const DIST = 70;
-  let ESCALA = 30 / span, flotaY = 0, OPACIDAD = 1;
+  let ALTO_FIN = 1, ALTO_INI = 1;
   const resize = () => {
     const s = size(); w = s.w; h = s.h;
     camera.aspect = w / h; camera.updateProjectionMatrix();
     renderer.setSize(w, h);
     camera.position.z = DIST;
-    const fov = camera.fov * Math.PI / 180;
-    const visH = 2 * DIST * Math.tan(fov / 2);
-    const visW = visH * camera.aspect;
+    const visH = 2 * DIST * Math.tan((camera.fov * Math.PI / 180) / 2);
     const movil = w < 900;
-    // En móvil el texto ocupa toda la pantalla: la pieza se queda pequeña,
-    // abajo y translúcida, o se come los botones.
-    ESCALA = (visH * (movil ? 0.20 : 0.38)) / span;
-    rig.position.x = movil ? 0 : visW * 0.34;         // fuera del bloque de texto
-    flotaY = movil ? -visH * 0.34 : visH * 0.02;
-    OPACIDAD = movil ? 0.5 : 1;
+    ALTO_FIN = (visH * (movil ? 0.42 : 0.56)) / alto;   // al fondo, detrás del texto
+    ALTO_INI = ALTO_FIN * (movil ? 2.1 : 2.5);          // de frente, casi llenando
   };
   addEventListener('resize', resize, { passive:true });
   resize();
@@ -633,27 +638,41 @@ function arrancar() {
   addEventListener('scroll', onScroll, { passive:true });
   onScroll();
 
-  // Entra girando justo cuando la cortina de apertura se abre.
-  const T0 = performance.now(), ENTRADA = 1700, ESPERA = 900;
+  // --- Coreografía -----------------------------------------------------------
+  // La cortina se abre a 1.15s y termina a ~2.05s. La pieza ya está de frente
+  // cuando se abre, y desde ahí retrocede girando una vuelta entera.
+  const T0 = performance.now();
+  const APARECE = 700;    // ms: crece desde nada, aún tapada por la cortina
+  const RETIRA_EN = 1500; // ms: empieza a irse al fondo
+  const RETIRA_DUR = 2600;
   const outCubic = (x) => 1 - Math.pow(1 - x, 3);
+  const inOut = (x) => x < 0.5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2;
+  const cl = (x) => Math.min(1, Math.max(0, x));
 
   function frame(now) {
-    const t = (now - T0) / 1000;
-    const intro = reduce ? 1 : outCubic(Math.min(Math.max((now - T0 - ESPERA) / ENTRADA, 0), 1));
+    const ms = now - T0, t = ms / 1000;
+    const entra = reduce ? 1 : outCubic(cl(ms / APARECE));
+    const q     = reduce ? 1 : inOut(cl((ms - RETIRA_EN) / RETIRA_DUR));
     sp += (p - sp) * 0.08;
 
-    pivot.scale.setScalar(ESCALA * (0.6 + 0.4 * intro));
-    group.rotation.y = (1 - intro) * -5.0 + sp * Math.PI * 1.2 + t * 0.1;
-    group.rotation.x = Math.sin(t * 0.32) * 0.14 + sp * 0.4;
-    group.rotation.z = Math.sin(t * 0.2) * 0.07;
+    // Tamaño: de casi llenar la pantalla a su sitio al fondo.
+    pivot.scale.setScalar((ALTO_INI + (ALTO_FIN - ALTO_INI) * q) * entra);
+
+    // Giro: UNA VUELTA COMPLETA mientras retrocede (se ve por los 4 costados)
+    // + deriva lenta que nunca para + el scroll sigue girándola.
+    group.rotation.y = q * Math.PI * 2 + t * 0.14 + sp * Math.PI * 0.8;
+    group.rotation.x = -0.06 + Math.sin(t * 0.3) * 0.10 + sp * 0.35;
+    group.rotation.z = Math.sin(t * 0.19) * 0.05;
 
     mouse.x += (aim.x - mouse.x) * 0.045;
     mouse.y += (aim.y - mouse.y) * 0.045;
-    rig.rotation.y = mouse.x * 0.24;
-    rig.rotation.x = mouse.y * 0.16;
-    rig.position.y = flotaY + Math.sin(t * 0.75) * 0.7;
+    rig.rotation.y = mouse.x * 0.20;
+    rig.rotation.x = mouse.y * 0.13;
+    rig.position.x = 0;                       // CENTRADA, no al lateral
+    rig.position.y = Math.sin(t * 0.7) * 0.6;
 
-    const vis = intro * OPACIDAD * (1 - Math.min(1, sp * 1.25));
+    const asentada = 1 - 0.44 * q;      // protagonista al entrar, fondo al posarse
+    const vis = entra * asentada * (1 - Math.min(1, sp * 1.3));
     renderer.domElement.style.opacity = String(Math.max(0, vis));
     if (vis > 0.01) renderer.render(scene, camera);
     requestAnimationFrame(frame);

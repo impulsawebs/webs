@@ -9,7 +9,8 @@
 <script type="importmap">
 { "imports": {
   "three": "../vendor/three/three.module.js",
-  "three/addons/": "../vendor/three/"
+  "three/addons/": "../vendor/three/",
+  "impulsa/": "../vendor/impulsa/"
 } }
 </script>
 <style>
@@ -449,7 +450,7 @@
 // Si el navegador no puede con WebGL, no pasa nada: se queda el SVG plano.
 // ===========================================================================
 import * as THREE from 'three';
-import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import { construirMallas } from 'impulsa/pieza3d.js';
 
 const host = document.querySelector('.glyph');
 const svgEl = host && host.querySelector('svg');
@@ -509,36 +510,11 @@ function build() {
     envMapIntensity: 1.15,
   });
 
-  // --- Construcción a partir del SVG que ya está en el DOM.
-  const paths = new SVGLoader().parse(svgEl.outerHTML).paths;
+  // --- Geometría de verdad: en dental, un molar modelado (corona con cuello,
+  // cuatro cúspides y dos raíces); en el resto, el SVG extruido con cuerpo.
+  // Antes se extruía siempre el SVG y de perfil se veía una chapa plana.
   const group = new THREE.Group();
-  const CLOSE_EPS = 0.6;      // en unidades del viewBox (0..24)
-
-  paths.forEach((path) => {
-    path.subPaths.forEach((sub) => {
-      // El SVG tiene la Y hacia abajo. Se invierte AQUÍ, en los puntos, en vez
-      // de con scale.y=-1 en el grupo: una escala negativa da la vuelta a las
-      // caras y las normales quedan del revés (la luz se rompe).
-      const pts = sub.getPoints(72).map(p => new THREE.Vector2(p.x, -p.y));
-      if (pts.length < 3) return;
-      const cerrado = pts[0].distanceTo(pts[pts.length - 1]) < CLOSE_EPS;
-      let geo;
-      if (cerrado) {
-        // Silueta rellena -> sólido extruido con bisel.
-        const shape = new THREE.Shape(pts);
-        geo = new THREE.ExtrudeGeometry(shape, {
-          depth: 3.4, bevelEnabled: true, bevelThickness: 0.5,
-          bevelSize: 0.42, bevelSegments: 5, curveSegments: 20,
-        });
-        geo.translate(0, 0, -1.7);
-      } else {
-        // Trazo suelto -> cordón redondo siguiendo la curva.
-        const curve = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(p.x, p.y, 0)));
-        geo = new THREE.TubeGeometry(curve, Math.max(24, pts.length), 0.42, 12, false);
-      }
-      group.add(new THREE.Mesh(geo, material));
-    });
-  });
+  construirMallas(true, svgEl.outerHTML).forEach((m) => group.add(m));
   if (!group.children.length) { renderer.dispose(); return; }
 
   // Centrar en su propio volumen y normalizar el tamaño.
