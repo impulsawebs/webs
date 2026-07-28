@@ -199,27 +199,32 @@
   .f-float-card .v { font-family:var(--font-display); font-size:1.5rem; }
   .f-float-line { height:1px; background:var(--line-l); margin:.35rem 0; }
 
-  /* ===== 2) Tarjetas de tratamiento ===== */
-  .f-cards-sec { background:var(--paper); }
-  .f-cards { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
-  .f-card { position:relative; overflow:hidden; border-radius:var(--radius-lg); min-height:420px;
-    display:flex; flex-direction:column; justify-content:space-between; padding:1.5rem;
-    color:#fff; isolation:isolate; transition:transform .55s cubic-bezier(.2,.8,.2,1); }
-  .f-card:hover { transform:translateY(-6px); }
-  .f-card-top { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; }
-  .f-tag { font-family:var(--mono); font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;
-    background:rgba(255,255,255,.14); backdrop-filter:blur(10px); border:1px solid var(--line-l);
-    border-radius:999px; padding:.4rem .85rem; }
-  .f-round { width:34px; height:34px; border-radius:50%; border:1px solid var(--line-l);
-    display:grid; place-items:center; background:rgba(255,255,255,.12); backdrop-filter:blur(10px);
-    transition:background .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
-  .f-round svg { width:15px; height:15px; stroke:#fff; fill:none; }
-  .f-card:hover .f-round { background:#fff; transform:rotate(-45deg); }
-  .f-card:hover .f-round svg { stroke:var(--ink); }
-  .f-card-foot { position:relative; z-index:2; }
-  .f-card-idx { font-family:var(--mono); font-size:.6rem; letter-spacing:.16em; opacity:.7; }
-  .f-card-foot h3 { margin-top:.5rem; font-size:clamp(1.4rem,2.3vw,1.9rem); line-height:1.06; }
-  .f-card-foot p { margin-top:.6rem; color:rgba(255,255,255,.78); font-size:.95rem; max-width:40ch; }
+  /* ===== 2) Vitrina de tratamientos =====
+     Blanco, aire y filetes. La versión anterior eran cajas con degradado y
+     esquinas redondeadas: eso es lo que hacía que la página pareciera de
+     plantilla. Aquí la pieza va suelta sobre fondo casi blanco. */
+  .f-vitrina { background:var(--paper); }
+  .f-piezas { display:grid; grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line); }
+  .f-pieza { border-right:1px solid var(--line); padding:0 0 2.6rem;
+    display:flex; flex-direction:column; }
+  .f-pieza:last-child { border-right:0; }
+  .f-pieza-vis { position:relative; aspect-ratio:1/1; display:grid; place-items:center;
+    background:#FAF9F7; overflow:hidden; }
+  .f-pieza-halo { position:absolute; width:62%; aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle at 42% 38%,
+      color-mix(in srgb, var(--brand) 16%, transparent), transparent 68%);
+    filter:blur(14px); }
+  .f-pieza-icono { position:relative; width:44%; }
+  .f-pieza-icono svg { width:100%; height:auto; fill:none; stroke:var(--ink);
+    stroke-width:.5; stroke-linecap:round; stroke-linejoin:round; opacity:.82;
+    transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+  .f-pieza:hover .f-pieza-icono svg { transform:scale(1.06) rotate(-3deg); }
+  .f-pieza-pie { padding:1.6rem 1.6rem 0; }
+  .f-pieza-pie h3 { font-size:1.25rem; line-height:1.15; }
+  .f-pieza-pie p { margin-top:.55rem; font-size:.93rem; max-width:34ch; }
+  .f-pieza-nota { display:inline-block; margin-top:1rem; font-family:var(--mono);
+    font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--brand); }
 
   /* ===== 3) Recorrido en oscuro ===== */
   .f-recorrido { background:var(--ink-2); color:#fff; }
@@ -227,7 +232,7 @@
   .f-flow { position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
   .f-flow-line { position:absolute; left:6%; right:6%; top:34px; height:1px;
     background:linear-gradient(90deg, transparent, var(--brand), transparent); z-index:0; }
-  .f-node { position:relative; z-index:1; padding:1.8rem 1.4rem; border-radius:var(--radius);
+  .f-node { position:relative; z-index:1; padding:1.8rem 1.4rem; border-radius:4px;
     border:1px solid var(--line-l); background:rgba(255,255,255,.035);
     transition:background .4s, border-color .4s, transform .5s cubic-bezier(.2,.8,.2,1); }
   .f-node:hover { background:rgba(255,255,255,.075); border-color:var(--brand); transform:translateY(-5px); }
@@ -279,7 +284,9 @@
   .footer-inner { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
 
   @media (max-width:1000px) {
-    .f-escena-grid, .f-cards, .f-two-col { grid-template-columns:1fr; }
+    .f-escena-grid, .f-two-col { grid-template-columns:1fr; }
+    .f-piezas { grid-template-columns:1fr 1fr; }
+    .f-pieza:nth-child(2) { border-right:0; }
     .f-flow { grid-template-columns:1fr 1fr; }
     .f-flow-line { display:none; }
     .f-float-card { position:relative; left:auto; bottom:auto; margin-top:2rem; }
@@ -290,8 +297,9 @@
     nav.links, .nav-tel, .nav-actions .f-btn { display:none; }
     .burger, .mobile-menu { display:flex; }
     .f-flow { grid-template-columns:1fr; }
+    .f-piezas { grid-template-columns:1fr; }
+    .f-pieza { border-right:0; border-bottom:1px solid var(--line); }
     section { padding:4.5rem 0; }
-    .f-card { min-height:340px; }
     .hero-meta { gap:1.4rem; }
   }
   @media (prefers-reduced-motion: reduce) {
