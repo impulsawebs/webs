@@ -432,7 +432,7 @@
     <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="spotlight" id="spotlight" aria-hidden="true"></div>
-    <div class="hero-inner" id="heroInner">
+    <div class="hero-inner" data-fx="fade" data-fx-pin id="heroInner">
       <span class="eyebrow">Tu dentista de confianza · La Carlota</span>
       <h1><span class="reveal-line"><span class="word " style="animation-delay:0.000s">Tu</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.055s">mejor</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.110s">sonrisa</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.165s">empieza</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.220s">en</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.275s">La</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.330s">Carlota</span></span></h1>
       <p class="lead">Si el dentista te da respeto, aquí vas a estar tranquilo: te acompañamos paso a paso y sin dolor.</p>
@@ -451,14 +451,14 @@
     <div class="scroll-cue" aria-hidden="true"><span class="line"></span>Desliza</div>
   </section>
 
-  <section id="servicios">
+  <section id="servicios" data-rail="Qué podemos hacer por ti">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow" style="margin-bottom:.9rem;">Servicios</span>
-        <h2>Qué podemos hacer por ti</h2>
-        <p>Soluciones claras para cada caso, explicadas sin tecnicismos y con presupuesto cerrado.</p>
+      <div class="section-head">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;">Servicios</span>
+        <h2 data-fx="words">Qué podemos hacer por ti</h2>
+        <p data-fx="rise">Soluciones claras para cada caso, explicadas sin tecnicismos y con presupuesto cerrado.</p>
       </div>
-      <div class="svc-list" data-reveal="stagger">
+      <div class="svc-list" data-fx="stagger">
         <div class="svc-row glow-card">
           <span class="svc-idx">01</span>
           <span class="svc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2c-1.7-1.2-4.8-1.6-6.2.9-1.5 2.5-.3 5.2.5 7.5.8 2.4 1.1 5.4 1.9 7.4.4 1 1.8 1 2.1-.1.4-1.5.6-3.5 1.7-3.5s1.3 2 1.7 3.5c.3 1.1 1.7 1.1 2.1.1.8-2 1.1-5 1.9-7.4.8-2.3 2-5 .5-7.5-1.4-2.5-4.5-2.1-6.2-.9z"/><path d="M9.4 7.4c-.8.3-1.4 1-1.6 1.9"/></svg></span>
@@ -487,8 +487,8 @@
     </div>
   </section>
 
-  <div class="ticker-band">
-    <div class="container ticker" data-reveal="stagger">
+  <div class="ticker-band" data-rail="Primera visita sin compromiso">
+    <div class="container ticker" data-fx="stagger">
       <div><div class="ticker-num">Sin compromiso</div><div class="ticker-label">Primera visita para valorarte y explicarte, sin presión.</div></div>
       <div><div class="ticker-num">Precio cerrado</div><div class="ticker-label">Presupuesto por escrito antes de empezar. Sin sorpresas.</div></div>
       <div><div class="ticker-num">Trato cercano</div><div class="ticker-label">Te lo contamos claro, sin tecnicismos.</div></div>
@@ -496,32 +496,32 @@
   </div>
 
   <div class="marquee" aria-hidden="true">
-    <div class="marquee-track"><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">La Carlota</span><span class="sep">●</span></span><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">La Carlota</span><span class="sep">●</span></span></div>
+    <div class="marquee-track" data-fx-marquee><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">La Carlota</span><span class="sep">●</span></span><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">La Carlota</span><span class="sep">●</span></span></div>
   </div>
 
-  <section id="nosotros" class="quote-section">
+  <section id="nosotros" class="quote-section" data-rail="Trato cercano">
     <div class="container">
-      <div class="quote-wrap" data-reveal>
-        <span class="quote-mark">"</span>
+      <div class="quote-wrap">
+        <span class="quote-mark" data-fx="parallax" data-fx-speed="54">"</span>
         <div>
-          <blockquote>Tratamos a cada persona como nos gustaría que nos tratasen a nosotros: con tiempo, honestidad y un plan claro desde el principio.</blockquote>
-          <div class="quote-source">El equipo de Clinica Dental las Escalonias</div>
+          <blockquote data-fx="words">Tratamos a cada persona como nos gustaría que nos tratasen a nosotros: con tiempo, honestidad y un plan claro desde el principio.</blockquote>
+          <div class="quote-source" data-fx="rise">El equipo de Clinica Dental las Escalonias</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contacto" class="finale">
-    <div class="container" data-reveal>
-      <span class="eyebrow" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
-      <h2>Estamos aquí para ayudarte</h2>
-      <div><a class="tel-giant" href="tel:+34957302121">+34 957 30 21 21</a></div>
-      <div class="finale-meta">
+  <section id="contacto" class="finale" data-rail="+34 957 30 21 21">
+    <div class="container">
+      <span class="eyebrow" data-fx="rise" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
+      <h2 data-fx="words">Estamos aquí para ayudarte</h2>
+      <div><a class="tel-giant" data-fx="chars" href="tel:+34957302121">+34 957 30 21 21</a></div>
+      <div class="finale-meta" data-fx="rise">
         <span>Clinica Dental las Escalonias</span><span class="sep">●</span>
         <span>La Carlota</span><span class="sep">●</span>
         <span>Pide tu cita sin compromiso</span>
       </div>
-      <div><span class="finale-chip"><span class="dot"></span>Reserva tu primera visita sin coste y sin compromiso</span></div>
+      <div data-fx="scale"><span class="finale-chip"><span class="dot"></span>Reserva tu primera visita sin coste y sin compromiso</span></div>
     </div>
   </section>
 </main>
@@ -667,175 +667,96 @@
     }, { passive: true });
   }
 
-  // ===== WebGL scene: plasma background + rotating wireframe icosahedron =====
+  // ===== WebGL scene: glowing 3D particle sphere (point cloud) =====
   (function initHeroScene() {
     var canvas = document.getElementById('heroCanvas');
     if (!canvas) return;
     var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     if (!gl) { canvas.remove(); return; }
 
-    function compile(type, src) {
-      var s = gl.createShader(type);
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      return s;
-    }
-    function makeProgram(vsSrc, fsSrc) {
-      var p = gl.createProgram();
-      gl.attachShader(p, compile(gl.VERTEX_SHADER, vsSrc));
-      gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fsSrc));
-      gl.linkProgram(p);
-      return p;
-    }
+    function compile(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; }
+    function makeProgram(vs, fs) { var p = gl.createProgram(); gl.attachShader(p, compile(gl.VERTEX_SHADER, vs)); gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p); return p; }
+    function hexToVec3(hex) { var h = hex.replace('#',''); return [parseInt(h.substr(0,2),16)/255, parseInt(h.substr(2,2),16)/255, parseInt(h.substr(4,2),16)/255]; }
+    function mat4Multiply(a,b){ var o=new Array(16); for(var i=0;i<4;i++)for(var j=0;j<4;j++){var s=0;for(var k=0;k<4;k++)s+=a[k*4+j]*b[i*4+k];o[i*4+j]=s;} return o; }
+    function mat4Perspective(fy,ar,n,f){ var t=1/Math.tan(fy/2),nf=1/(n-f); return [t/ar,0,0,0, 0,t,0,0, 0,0,(f+n)*nf,-1, 0,0,2*f*n*nf,0]; }
+    function mat4RotateY(r){var c=Math.cos(r),s=Math.sin(r);return[c,0,-s,0,0,1,0,0,s,0,c,0,0,0,0,1];}
+    function mat4RotateX(r){var c=Math.cos(r),s=Math.sin(r);return[1,0,0,0,0,c,s,0,0,-s,c,0,0,0,0,1];}
+    function mat4Translate(x,y,z){return[1,0,0,0,0,1,0,0,0,0,1,0,x,y,z,1];}
 
-    // --- plasma background (fullscreen triangle) ---
-    var plasmaProg = makeProgram(
-      'attribute vec2 aPos; void main() { gl_Position = vec4(aPos, 0.0, 1.0); }',
-      [
-        'precision mediump float;',
-        'uniform vec2 uRes; uniform float uTime; uniform vec3 uColorA; uniform vec3 uColorB;',
-        'void main() {',
-        '  vec2 uv = gl_FragCoord.xy / uRes;',
-        '  float t = uTime;',
-        '  float v = sin(uv.x * 4.5 + t * 0.45);',
-        '  v += sin(uv.y * 6.0 - t * 0.35);',
-        '  v += sin((uv.x + uv.y) * 5.0 + t * 0.4);',
-        '  v += sin(length(uv - vec2(0.5, 0.35)) * 7.5 - t * 0.7);',
-        '  v *= 0.25;',
-        '  float mixv = 0.5 + 0.5 * sin(v * 3.14159 + t * 0.2);',
-        '  vec3 col = mix(uColorA, uColorB, mixv);',
-        '  gl_FragColor = vec4(col, 1.0);',
+    var brand = hexToVec3('#4F46E5');
+    var brandSoft = hexToVec3('#eae9fc');
+
+    // Fibonacci sphere point cloud
+    var N = 1600, pos = new Float32Array(N*3), rnd = new Float32Array(N);
+    var GA = Math.PI * (3 - Math.sqrt(5));
+    for (var i=0;i<N;i++){
+      var y = 1 - (i/(N-1))*2, r = Math.sqrt(Math.max(0,1-y*y)), th = GA*i;
+      pos[i*3]=Math.cos(th)*r; pos[i*3+1]=y; pos[i*3+2]=Math.sin(th)*r;
+      rnd[i]=Math.random();
+    }
+    var prog = makeProgram(
+      [ 'attribute vec3 aPos; attribute float aRnd;',
+        'uniform mat4 uMVP; uniform float uTime; uniform vec2 uMouse; uniform float uDpr;',
+        'varying float vShade; varying float vRnd;',
+        'void main(){',
+        ' vec3 p = aPos;',
+        ' float br = 1.0 + 0.05*sin(uTime*0.7 + aRnd*8.0);',
+        ' p *= br;',
+        ' vec4 mv = uMVP * vec4(p,1.0);',
+        ' gl_Position = mv;',
+        ' vShade = clamp(1.0 - (mv.w-2.5)/4.0, 0.15, 1.0);',
+        ' vRnd = aRnd;',
+        ' gl_PointSize = uDpr * (1.5 + 3.5*vShade) * (1.0 + 0.5*aRnd);',
+        '}'
+      ].join('\n'),
+      [ 'precision mediump float; uniform vec3 uA; uniform vec3 uB; varying float vShade; varying float vRnd;',
+        'void main(){',
+        ' vec2 c = gl_PointCoord - 0.5; float d = length(c);',
+        ' if(d>0.5) discard;',
+        ' float a = smoothstep(0.5,0.0,d) * (0.35 + 0.65*vShade);',
+        ' vec3 col = mix(uA, uB, vRnd);',
+        ' gl_FragColor = vec4(col, a);',
         '}'
       ].join('\n')
     );
-    var plasmaBuf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, plasmaBuf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
-    var plasmaAPos = gl.getAttribLocation(plasmaProg, 'aPos');
-    var uRes = gl.getUniformLocation(plasmaProg, 'uRes');
-    var uTime = gl.getUniformLocation(plasmaProg, 'uTime');
-    var uColorA = gl.getUniformLocation(plasmaProg, 'uColorA');
-    var uColorB = gl.getUniformLocation(plasmaProg, 'uColorB');
+    gl.useProgram(prog);
+    var posBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, posBuf); gl.bufferData(gl.ARRAY_BUFFER, pos, gl.STATIC_DRAW);
+    var aPos = gl.getAttribLocation(prog,'aPos');
+    var rndBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, rndBuf); gl.bufferData(gl.ARRAY_BUFFER, rnd, gl.STATIC_DRAW);
+    var aRnd = gl.getAttribLocation(prog,'aRnd');
+    var uMVP = gl.getUniformLocation(prog,'uMVP'), uTime = gl.getUniformLocation(prog,'uTime'),
+        uMouse = gl.getUniformLocation(prog,'uMouse'), uDpr = gl.getUniformLocation(prog,'uDpr'),
+        uA = gl.getUniformLocation(prog,'uA'), uB = gl.getUniformLocation(prog,'uB');
 
-    function hexToVec3(hex) {
-      var h = hex.replace('#', '');
-      return [parseInt(h.substr(0,2),16)/255, parseInt(h.substr(2,2),16)/255, parseInt(h.substr(4,2),16)/255];
-    }
-    var colorA = hexToVec3('#4F46E5');
-    var colorB = hexToVec3('#161440');
+    var dprv = Math.min(window.devicePixelRatio || 1, 2);
+    function resize(){ var w=canvas.clientWidth*dprv, h=canvas.clientHeight*dprv; if(canvas.width!==w||canvas.height!==h){ canvas.width=w; canvas.height=h; gl.viewport(0,0,w,h); } }
+    resize(); window.addEventListener('resize', resize);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE); // additive glow
+    gl.uniform3fv(uA, brandSoft); gl.uniform3fv(uB, brand); gl.uniform1f(uDpr, dprv);
 
-    // --- rotating wireframe icosahedron ---
-    var wireProg = makeProgram(
-      'attribute vec3 aPos; uniform mat4 uMVP; void main() { gl_Position = uMVP * vec4(aPos, 1.0); }',
-      'precision mediump float; uniform vec4 uLineColor; void main() { gl_FragColor = uLineColor; }'
-    );
-    // Distinct wireframe polyhedron per clinic (selected at build time).
-    function buildGeometry(kind) {
-      var P = (1 + Math.sqrt(5)) / 2;
-      var defs = {
-        ico: { v: [[-1,P,0],[1,P,0],[-1,-P,0],[1,-P,0],[0,-1,P],[0,1,P],[0,-1,-P],[0,1,-P],[P,0,-1],[P,0,1],[-P,0,-1],[-P,0,1]],
-          e: [[0,1],[0,5],[0,7],[0,10],[0,11],[1,5],[1,7],[1,8],[1,9],[2,3],[2,4],[2,6],[2,10],[2,11],[3,4],[3,6],[3,8],[3,9],[4,5],[4,9],[4,11],[5,9],[5,11],[6,7],[6,8],[6,10],[7,8],[7,10],[8,9],[10,11]] },
-        octa: { v: [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
-          e: [[0,2],[0,3],[0,4],[0,5],[1,2],[1,3],[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]] },
-        cube: { v: [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]],
-          e: [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]] },
-        tetra: { v: [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],
-          e: [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]] }
-      };
-      var d = defs[kind] || defs.ico;
-      var vs = [];
-      d.v.forEach(function (v) { var l = Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]); vs.push(v[0]/l, v[1]/l, v[2]/l); });
-      var idx = [];
-      d.e.forEach(function (e) { idx.push(e[0], e[1]); });
-      return { verts: vs, edges: idx };
-    }
-    var geo = buildGeometry('tetra');
-    var verts = geo.verts;
-    var edgeIndices = geo.edges;
+    var scrollN = 0;
+    window.addEventListener('scroll', function(){ scrollN = Math.min(window.scrollY / (innerHeight||800), 1.4); }, { passive:true });
 
-    var wireVertBuf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, wireVertBuf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
-    var wireIndexBuf = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, wireIndexBuf);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(edgeIndices), gl.STATIC_DRAW);
-    var wireAPos = gl.getAttribLocation(wireProg, 'aPos');
-    var uMVP = gl.getUniformLocation(wireProg, 'uMVP');
-    var uLineColor = gl.getUniformLocation(wireProg, 'uLineColor');
-
-    function mat4Multiply(a, b) {
-      var out = new Array(16);
-      for (var i = 0; i < 4; i++) {
-        for (var j = 0; j < 4; j++) {
-          var sum = 0;
-          for (var k = 0; k < 4; k++) sum += a[k*4+j] * b[i*4+k];
-          out[i*4+j] = sum;
-        }
-      }
-      return out;
-    }
-    function mat4Perspective(fovy, aspect, near, far) {
-      var f = 1 / Math.tan(fovy / 2), nf = 1 / (near - far);
-      return [f/aspect,0,0,0, 0,f,0,0, 0,0,(far+near)*nf,-1, 0,0,2*far*near*nf,0];
-    }
-    function mat4RotateY(r) { var c=Math.cos(r), s=Math.sin(r); return [c,0,-s,0, 0,1,0,0, s,0,c,0, 0,0,0,1]; }
-    function mat4RotateX(r) { var c=Math.cos(r), s=Math.sin(r); return [1,0,0,0, 0,c,s,0, 0,-s,c,0, 0,0,0,1]; }
-    function mat4Translate(x,y,z) { return [1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1]; }
-
-    function resize() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr;
-      if (canvas.width !== w || canvas.height !== h) {
-        canvas.width = w; canvas.height = h;
-        gl.viewport(0, 0, w, h);
-      }
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    gl.enable(gl.DEPTH_TEST);
-    gl.clearDepth(1.0);
-
-    function drawFrame(t) {
+    function drawFrame(t){
       resize();
-      gl.disable(gl.DEPTH_TEST);
-      gl.useProgram(plasmaProg);
-      gl.bindBuffer(gl.ARRAY_BUFFER, plasmaBuf);
-      gl.enableVertexAttribArray(plasmaAPos);
-      gl.vertexAttribPointer(plasmaAPos, 2, gl.FLOAT, false, 0, 0);
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, t);
-      gl.uniform3fv(uColorA, colorA);
-      gl.uniform3fv(uColorB, colorB);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-
-      gl.enable(gl.DEPTH_TEST);
-      gl.clear(gl.DEPTH_BUFFER_BIT);
-      gl.useProgram(wireProg);
+      gl.clear(gl.COLOR_BUFFER_BIT);
       var aspect = canvas.width / canvas.height;
-      var proj = mat4Perspective(0.55, aspect, 0.1, 100);
-      var view = mat4Translate(aspect > 1.05 ? 1.3 : 0, -0.1, -4.4);
-      var rotY = mat4RotateY(t * 0.18 + (mouseX - 0.5) * 0.6);
-      var rotX = mat4RotateX(0.5 + (mouseY - 0.5) * 0.4);
-      var model = mat4Multiply(rotY, rotX);
-      var mv = mat4Multiply(view, model);
-      var mvp = mat4Multiply(proj, mv);
+      var proj = mat4Perspective(0.7, aspect, 0.1, 100);
+      // as you scroll, the cloud drifts back and to the side
+      var view = mat4Translate((aspect>1.05?1.15:0) + scrollN*0.4, -0.05, -3.9 - scrollN*2.2);
+      var rotY = mat4RotateY(t*0.14 + (mouseX-0.5)*0.7 + scrollN*1.2);
+      var rotX = mat4RotateX(0.35 + (mouseY-0.5)*0.5);
+      var mvp = mat4Multiply(proj, mat4Multiply(view, mat4Multiply(rotY, rotX)));
       gl.uniformMatrix4fv(uMVP, false, new Float32Array(mvp));
-      gl.uniform4f(uLineColor, 1, 1, 1, 0.55);
-      gl.bindBuffer(gl.ARRAY_BUFFER, wireVertBuf);
-      gl.enableVertexAttribArray(wireAPos);
-      gl.vertexAttribPointer(wireAPos, 3, gl.FLOAT, false, 0, 0);
-      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, wireIndexBuf);
-      gl.lineWidth(1);
-      gl.drawElements(gl.LINES, edgeIndices.length, gl.UNSIGNED_SHORT, 0);
+      gl.uniform1f(uTime, t); gl.uniform2f(uMouse, mouseX, mouseY);
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos,3,gl.FLOAT,false,0,0);
+      gl.bindBuffer(gl.ARRAY_BUFFER, rndBuf); gl.enableVertexAttribArray(aRnd); gl.vertexAttribPointer(aRnd,1,gl.FLOAT,false,0,0);
+      gl.drawArrays(gl.POINTS, 0, N);
     }
 
     if (reduceMotion) { drawFrame(0); return; }
     var start = null;
-    function frame(ts) {
-      if (start === null) start = ts;
-      drawFrame((ts - start) / 1000);
-      requestAnimationFrame(frame);
-    }
+    function frame(ts){ if(start===null)start=ts; drawFrame((ts-start)/1000); requestAnimationFrame(frame); }
     requestAnimationFrame(frame);
   })();
 })();
@@ -858,5 +779,236 @@
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.18z"/></svg>
   </a>
 </div>
+
+<style id="fx-css">
+  /* Barra de progreso: referencia constante de dónde estás en la página. */
+  .fx-progress { position:fixed; top:0; left:0; height:2px; width:100%; z-index:80;
+    transform:scaleX(0); transform-origin:0 50%; background:var(--brand, currentColor);
+    pointer-events:none; will-change:transform; }
+  /* Rótulos verticales en los bordes. Cambian de texto según la sección que
+     estés mirando: dan continuidad y sensación de "sitio con criterio". */
+  .fx-rail { position:fixed; top:0; bottom:0; width:2.6rem; z-index:40; pointer-events:none;
+    display:none; align-items:center; justify-content:center; overflow:hidden; }
+  .fx-rail.l { left:0; } .fx-rail.r { right:0; }
+  .fx-rail span { display:block; white-space:nowrap; font-size:.62rem; font-weight:700;
+    letter-spacing:.34em; text-transform:uppercase; opacity:.4;
+    transition:opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .fx-rail.l span { transform:rotate(180deg); writing-mode:vertical-rl; }
+  .fx-rail.r span { writing-mode:vertical-rl; }
+  .fx-rail span.out { opacity:0; }
+  @media (min-width:1100px) { .fx-rail { display:flex; } }
+  /* Las palabras/letras partidas no deben romper el texto ni el copiar-pegar. */
+  .fx-w { display:inline-block; white-space:nowrap; }
+  .fx-c { display:inline-block; }
+  html.fx-on [data-fx] { will-change:transform, opacity; }
+  @media (prefers-reduced-motion: reduce) { .fx-progress, .fx-rail { display:none; } }
+</style>
+<script>
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var root = document.documentElement;
+  var els = [], rails = [], bar = null, railL = null, railR = null;
+  var lastY = scrollY, vel = 0, railNow = '';
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  // Suavizado: el movimiento no debe ser lineal o parece una hoja de cálculo.
+  function ease(p) { return p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3)/2; }
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+
+  // Parte el texto en palabras (y opcionalmente letras) SIN romper palabras a
+  // mitad: cada palabra es un inline-block nowrap.
+  function split(el, chars) {
+    if (el.dataset.fxSplit) return;
+    el.dataset.fxSplit = '1';
+    var walk = function (node) {
+      [].slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (tok) {
+            if (!tok) return;
+            if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span'); w.className = 'fx-w';
+            if (chars) {
+              [].slice.call(tok).forEach(function (c) {
+                var s = document.createElement('span'); s.className = 'fx-c'; s.textContent = c;
+                w.appendChild(s);
+              });
+            } else { w.textContent = tok; }
+            frag.appendChild(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains('fx-w')) walk(n);
+      });
+    };
+    walk(el);
+  }
+
+  function register() {
+    els = [];
+    [].slice.call(document.querySelectorAll('[data-fx]')).forEach(function (el) {
+      var kind = el.dataset.fx;
+      var item = { el: el, kind: kind, speed: parseFloat(el.dataset.fxSpeed || '0') || 0,
+                   from: el.dataset.fxFrom || 'up', parts: null, pin: 'fxPin' in el.dataset };
+      if (kind === 'words' || kind === 'chars') {
+        split(el, kind === 'chars');
+        item.parts = [].slice.call(el.querySelectorAll(kind === 'chars' ? '.fx-c' : '.fx-w'));
+      } else if (kind === 'stagger') {
+        item.parts = [].slice.call(el.children);
+      }
+      els.push(item);
+    });
+    rails = [].slice.call(document.querySelectorAll('[data-rail]'));
+  }
+
+  function apply(it, vh) {
+    var el = it.el, r = el.getBoundingClientRect();
+    // Fuera de la ventana con margen: no gastes fotogramas en ello.
+    if (r.bottom < -vh * 0.6 || r.top > vh * 1.6) return;
+
+    // p = progreso de ENTRADA (0 cuando el borde superior toca abajo del todo,
+    // 1 cuando ha subido un tercio de pantalla). q = progreso de TRAVESÍA
+    // completa por la ventana, para parallax.
+    var p = clamp((vh - r.top) / (vh * 0.62), 0, 1);
+    var q = clamp((vh - r.top) / (vh + r.height), 0, 1);
+    var e = easeOut(p), s = el.style;
+
+    switch (it.kind) {
+      case 'rise':
+        s.opacity = e;
+        s.transform = 'translate3d(0,' + ((1 - e) * 46).toFixed(2) + 'px,0)';
+        break;
+      case 'fade':
+        s.opacity = e;
+        break;
+      case 'scale':
+        s.opacity = e;
+        s.transform = 'scale(' + (0.93 + e * 0.07).toFixed(4) + ')';
+        break;
+      case 'clip':
+        s.opacity = e < 0.05 ? 0 : 1;
+        s.clipPath = it.from === 'left'
+          ? 'inset(0 ' + ((1 - e) * 100).toFixed(2) + '% 0 0)'
+          : 'inset(' + ((1 - e) * 105).toFixed(2) + '% 0 0 0)';
+        break;
+      case 'line':
+        s.transform = 'scaleX(' + e.toFixed(4) + ')';
+        s.transformOrigin = '0 50%';
+        break;
+      case 'parallax':
+        s.transform = 'translate3d(0,' + ((0.5 - q) * (it.speed || 90)).toFixed(2) + 'px,0)';
+        break;
+      case 'drift':
+        // Deriva lateral + giro suave: da vida a los objetos grandes.
+        s.transform = 'translate3d(' + ((0.5 - q) * (it.speed || 60)).toFixed(2) + 'px,'
+          + ((0.5 - q) * (it.speed || 60) * 0.5).toFixed(2) + 'px,0) rotate('
+          + ((q - 0.5) * 8).toFixed(2) + 'deg)';
+        break;
+      case 'words':
+      case 'chars': {
+        // Cada palabra/letra tiene su propia ventana dentro del progreso del
+        // bloque: el titular se "escribe" conforme bajas, y se deshace al subir.
+        var n = it.parts.length, spread = 0.55;
+        for (var i = 0; i < n; i++) {
+          var st = (i / n) * spread;
+          var wp = easeOut(clamp((p - st) / (1 - spread), 0, 1));
+          var ps = it.parts[i].style;
+          ps.opacity = wp;
+          ps.transform = 'translate3d(0,' + ((1 - wp) * 0.85).toFixed(3) + 'em,0)';
+        }
+        break;
+      }
+      case 'stagger': {
+        var m = it.parts.length, sp = 0.5;
+        for (var j = 0; j < m; j++) {
+          var st2 = (j / m) * sp;
+          var cp = easeOut(clamp((p - st2) / (1 - sp), 0, 1));
+          var cs = it.parts[j].style;
+          cs.opacity = cp;
+          cs.transform = 'translate3d(0,' + ((1 - cp) * 34).toFixed(2) + 'px,0)';
+        }
+        break;
+      }
+    }
+
+    // data-fx-pin: al salir por arriba, el bloque se aleja y se apaga en vez
+    // de desaparecer de golpe. Es el gesto que hace que el hero no "corte".
+    if (it.pin && r.top < 0) {
+      var out = clamp(-r.top / (vh * 0.9), 0, 1);
+      s.opacity = String(1 - out);
+      s.transform = 'translate3d(0,' + (out * -60).toFixed(1) + 'px,0) scale(' + (1 - out * 0.06).toFixed(4) + ')';
+      s.filter = out > 0.02 ? 'blur(' + (out * 7).toFixed(2) + 'px)' : '';
+    }
+  }
+
+  // Cintas: en vez de girar solas a velocidad fija, las mueve el scroll (y la
+  // inercia). Es un detalle pequeño que se nota muchísimo. Van en su propio
+  // bucle continuo (son 1-2 elementos) para no obligar al resto del motor a
+  // redibujar 30 veces por segundo sin motivo.
+  var tracks = [];
+  function tick() {
+    for (var i = 0; i < tracks.length; i++) {
+      var t = tracks[i];
+      t.off += t.dir * 0.4 + vel * t.dir * 0.35;
+      var w = t.el.scrollWidth / 2;
+      if (w > 0) { if (t.off > w) t.off -= w; if (t.off < -w) t.off += w; }
+      t.el.style.transform = 'translate3d(' + (-t.off).toFixed(2) + 'px,0,0)';
+    }
+    vel *= 0.9;
+    if (tracks.length) requestAnimationFrame(tick);
+  }
+
+  // El rótulo del borde es el de la última sección cuyo inicio ya has pasado.
+  function railFor(vh) {
+    var mid = vh * 0.45, txt = '';
+    for (var i = 0; i < rails.length; i++) {
+      if (rails[i].getBoundingClientRect().top <= mid) txt = rails[i].dataset.rail;
+    }
+    if (txt === railNow || !railL) return;
+    railNow = txt;
+    [railL, railR].forEach(function (rail) {
+      var sp = rail.firstChild;
+      sp.classList.add('out');
+      setTimeout(function () { sp.textContent = txt; sp.classList.remove('out'); }, 260);
+    });
+  }
+
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var vh = innerHeight;
+    var y = scrollY;
+    vel += ((y - lastY) - vel) * 0.25;
+    lastY = y;
+    for (var i = 0; i < els.length; i++) apply(els[i], vh);
+    railFor(vh);
+    if (bar) {
+      var max = document.documentElement.scrollHeight - vh;
+      bar.style.transform = 'scaleX(' + (max > 0 ? clamp(y / max, 0, 1) : 0).toFixed(4) + ')';
+    }
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+
+  function init() {
+    root.classList.add('fx-on');
+    bar = document.createElement('div'); bar.className = 'fx-progress'; document.body.appendChild(bar);
+    railL = document.createElement('div'); railL.className = 'fx-rail l'; railL.appendChild(document.createElement('span'));
+    railR = document.createElement('div'); railR.className = 'fx-rail r'; railR.appendChild(document.createElement('span'));
+    document.body.appendChild(railL); document.body.appendChild(railR);
+    register();
+    tracks = [].slice.call(document.querySelectorAll('[data-fx-marquee]')).map(function (el, i) {
+      el.style.animation = 'none';
+      return { el: el, off: 0, dir: i % 2 ? -1 : 1 };
+    });
+    addEventListener('scroll', request, { passive: true });
+    addEventListener('resize', function () { register(); request(); }, { passive: true });
+    // Las imágenes cambian la altura de los bloques al cargar: recalcula.
+    addEventListener('load', function () { register(); request(); });
+    if (tracks.length) requestAnimationFrame(tick);
+    request();
+  }
+  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 </body>
 </html>

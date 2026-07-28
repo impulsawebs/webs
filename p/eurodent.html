@@ -432,7 +432,7 @@
     <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="spotlight" id="spotlight" aria-hidden="true"></div>
-    <div class="hero-inner" id="heroInner">
+    <div class="hero-inner" data-fx="fade" data-fx-pin id="heroInner">
       <span class="eyebrow">Salud y estética dental · Peñafiel</span>
       <h1><span class="reveal-line"><span class="word " style="animation-delay:0.000s">Sonríe</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.055s">con</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.110s">confianza</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.165s">en</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.220s">Peñafiel</span></span></h1>
       <p class="lead">Prevención, estética y tratamientos avanzados en un solo sitio. En Clínica Eurodent tu boca está en buenas manos.</p>
@@ -451,22 +451,22 @@
     <div class="scroll-cue" aria-hidden="true"><span class="line"></span>Desliza</div>
   </section>
 
-  <div class="ticker-band">
-    <div class="container ticker" data-reveal="stagger">
+  <div class="ticker-band" data-rail="Primera visita sin compromiso">
+    <div class="container ticker" data-fx="stagger">
       <div><div class="ticker-num">Sin compromiso</div><div class="ticker-label">Primera visita para valorarte y explicarte, sin presión.</div></div>
       <div><div class="ticker-num">Precio cerrado</div><div class="ticker-label">Presupuesto por escrito antes de empezar. Sin sorpresas.</div></div>
       <div><div class="ticker-num">Trato cercano</div><div class="ticker-label">Te lo contamos claro, sin tecnicismos.</div></div>
     </div>
   </div>
 
-  <section id="servicios">
+  <section id="servicios" data-rail="Nuestros tratamientos">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow" style="margin-bottom:.9rem;">Qué hacemos</span>
-        <h2>Nuestros tratamientos</h2>
-        <p>De la revisión a la estética: cubrimos todo lo que tu boca necesita bajo un mismo techo.</p>
+      <div class="section-head">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;">Qué hacemos</span>
+        <h2 data-fx="words">Nuestros tratamientos</h2>
+        <p data-fx="rise">De la revisión a la estética: cubrimos todo lo que tu boca necesita bajo un mismo techo.</p>
       </div>
-      <div class="svc-list" data-reveal="stagger">
+      <div class="svc-list" data-fx="stagger">
         <div class="svc-row glow-card">
           <span class="svc-idx">01</span>
           <span class="svc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2c-1.7-1.2-4.8-1.6-6.2.9-1.5 2.5-.3 5.2.5 7.5.8 2.4 1.1 5.4 1.9 7.4.4 1 1.8 1 2.1-.1.4-1.5.6-3.5 1.7-3.5s1.3 2 1.7 3.5c.3 1.1 1.7 1.1 2.1.1.8-2 1.1-5 1.9-7.4.8-2.3 2-5 .5-7.5-1.4-2.5-4.5-2.1-6.2-.9z"/><path d="M9.4 7.4c-.8.3-1.4 1-1.6 1.9"/></svg></span>
@@ -495,22 +495,22 @@
     </div>
   </section>
 
-  <section id="proceso">
+  <section id="proceso" data-rail="Cómo trabajamos">
     <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow" style="margin-bottom:.9rem;justify-content:center;">Cómo trabajamos</span>
-        <h2>Tan fácil como tres pasos</h2>
+      <div class="section-head center">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;justify-content:center;">Cómo trabajamos</span>
+        <h2 data-fx="words">Tan fácil como tres pasos</h2>
       </div>
-      <div class="proceso-grid">
-        <div class="step" data-reveal>
+      <div class="proceso-grid" data-fx="stagger">
+        <div class="step">
           <span class="step-n">01</span>
           <h3>Pides cita</h3><p>Nos llamas o rellenas el formulario. Te damos hueco cuanto antes, incluso el mismo día si es urgencia.</p>
         </div>
-        <div class="step" data-reveal>
+        <div class="step">
           <span class="step-n">02</span>
           <h3>Te valoramos</h3><p>Primera visita sin compromiso: revisamos, te explicamos y te damos un presupuesto cerrado.</p>
         </div>
-        <div class="step" data-reveal>
+        <div class="step">
           <span class="step-n">03</span>
           <h3>Empezamos</h3><p>Decidís vosotros. Nosotros cuidamos cada detalle hasta que estés contento con el resultado.</p>
         </div>
@@ -518,13 +518,13 @@
     </div>
   </section>
 
-  <section id="nosotros">
+  <section id="nosotros" data-rail="Por qué elegirnos">
     <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow" style="margin-bottom:.9rem;justify-content:center;">Nuestro compromiso</span>
-        <h2>Por qué elegirnos</h2>
+      <div class="section-head center">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;justify-content:center;">Nuestro compromiso</span>
+        <h2 data-fx="words">Por qué elegirnos</h2>
       </div>
-      <div class="quote-trio" data-reveal="stagger">
+      <div class="quote-trio" data-fx="stagger">
         <div class="qcard">
           <p>Presupuesto cerrado y por escrito antes de empezar.</p>
           <div class="who">Sin sorpresas</div>
@@ -541,17 +541,17 @@
     </div>
   </section>
 
-  <section id="contacto" class="finale">
-    <div class="container" data-reveal>
-      <span class="eyebrow" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
-      <h2>Estamos aquí para ayudarte</h2>
-      <div><a class="tel-giant" href="tel:+34983880739">+34 983880739</a></div>
-      <div class="finale-meta">
+  <section id="contacto" class="finale" data-rail="+34 983880739">
+    <div class="container">
+      <span class="eyebrow" data-fx="rise" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
+      <h2 data-fx="words">Estamos aquí para ayudarte</h2>
+      <div><a class="tel-giant" data-fx="chars" href="tel:+34983880739">+34 983880739</a></div>
+      <div class="finale-meta" data-fx="rise">
         <span>Clínica Eurodent</span><span class="sep">●</span>
         <span>Peñafiel</span><span class="sep">●</span>
         <span>Pide tu cita sin compromiso</span>
       </div>
-      <div><span class="finale-chip"><span class="dot"></span>Primera consulta sin compromiso — citas disponibles esta semana</span></div>
+      <div data-fx="scale"><span class="finale-chip"><span class="dot"></span>Primera consulta sin compromiso — citas disponibles esta semana</span></div>
     </div>
   </section>
 </main>
@@ -809,5 +809,236 @@
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.18z"/></svg>
   </a>
 </div>
+
+<style id="fx-css">
+  /* Barra de progreso: referencia constante de dónde estás en la página. */
+  .fx-progress { position:fixed; top:0; left:0; height:2px; width:100%; z-index:80;
+    transform:scaleX(0); transform-origin:0 50%; background:var(--brand, currentColor);
+    pointer-events:none; will-change:transform; }
+  /* Rótulos verticales en los bordes. Cambian de texto según la sección que
+     estés mirando: dan continuidad y sensación de "sitio con criterio". */
+  .fx-rail { position:fixed; top:0; bottom:0; width:2.6rem; z-index:40; pointer-events:none;
+    display:none; align-items:center; justify-content:center; overflow:hidden; }
+  .fx-rail.l { left:0; } .fx-rail.r { right:0; }
+  .fx-rail span { display:block; white-space:nowrap; font-size:.62rem; font-weight:700;
+    letter-spacing:.34em; text-transform:uppercase; opacity:.4;
+    transition:opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .fx-rail.l span { transform:rotate(180deg); writing-mode:vertical-rl; }
+  .fx-rail.r span { writing-mode:vertical-rl; }
+  .fx-rail span.out { opacity:0; }
+  @media (min-width:1100px) { .fx-rail { display:flex; } }
+  /* Las palabras/letras partidas no deben romper el texto ni el copiar-pegar. */
+  .fx-w { display:inline-block; white-space:nowrap; }
+  .fx-c { display:inline-block; }
+  html.fx-on [data-fx] { will-change:transform, opacity; }
+  @media (prefers-reduced-motion: reduce) { .fx-progress, .fx-rail { display:none; } }
+</style>
+<script>
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var root = document.documentElement;
+  var els = [], rails = [], bar = null, railL = null, railR = null;
+  var lastY = scrollY, vel = 0, railNow = '';
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  // Suavizado: el movimiento no debe ser lineal o parece una hoja de cálculo.
+  function ease(p) { return p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3)/2; }
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+
+  // Parte el texto en palabras (y opcionalmente letras) SIN romper palabras a
+  // mitad: cada palabra es un inline-block nowrap.
+  function split(el, chars) {
+    if (el.dataset.fxSplit) return;
+    el.dataset.fxSplit = '1';
+    var walk = function (node) {
+      [].slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (tok) {
+            if (!tok) return;
+            if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span'); w.className = 'fx-w';
+            if (chars) {
+              [].slice.call(tok).forEach(function (c) {
+                var s = document.createElement('span'); s.className = 'fx-c'; s.textContent = c;
+                w.appendChild(s);
+              });
+            } else { w.textContent = tok; }
+            frag.appendChild(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains('fx-w')) walk(n);
+      });
+    };
+    walk(el);
+  }
+
+  function register() {
+    els = [];
+    [].slice.call(document.querySelectorAll('[data-fx]')).forEach(function (el) {
+      var kind = el.dataset.fx;
+      var item = { el: el, kind: kind, speed: parseFloat(el.dataset.fxSpeed || '0') || 0,
+                   from: el.dataset.fxFrom || 'up', parts: null, pin: 'fxPin' in el.dataset };
+      if (kind === 'words' || kind === 'chars') {
+        split(el, kind === 'chars');
+        item.parts = [].slice.call(el.querySelectorAll(kind === 'chars' ? '.fx-c' : '.fx-w'));
+      } else if (kind === 'stagger') {
+        item.parts = [].slice.call(el.children);
+      }
+      els.push(item);
+    });
+    rails = [].slice.call(document.querySelectorAll('[data-rail]'));
+  }
+
+  function apply(it, vh) {
+    var el = it.el, r = el.getBoundingClientRect();
+    // Fuera de la ventana con margen: no gastes fotogramas en ello.
+    if (r.bottom < -vh * 0.6 || r.top > vh * 1.6) return;
+
+    // p = progreso de ENTRADA (0 cuando el borde superior toca abajo del todo,
+    // 1 cuando ha subido un tercio de pantalla). q = progreso de TRAVESÍA
+    // completa por la ventana, para parallax.
+    var p = clamp((vh - r.top) / (vh * 0.62), 0, 1);
+    var q = clamp((vh - r.top) / (vh + r.height), 0, 1);
+    var e = easeOut(p), s = el.style;
+
+    switch (it.kind) {
+      case 'rise':
+        s.opacity = e;
+        s.transform = 'translate3d(0,' + ((1 - e) * 46).toFixed(2) + 'px,0)';
+        break;
+      case 'fade':
+        s.opacity = e;
+        break;
+      case 'scale':
+        s.opacity = e;
+        s.transform = 'scale(' + (0.93 + e * 0.07).toFixed(4) + ')';
+        break;
+      case 'clip':
+        s.opacity = e < 0.05 ? 0 : 1;
+        s.clipPath = it.from === 'left'
+          ? 'inset(0 ' + ((1 - e) * 100).toFixed(2) + '% 0 0)'
+          : 'inset(' + ((1 - e) * 105).toFixed(2) + '% 0 0 0)';
+        break;
+      case 'line':
+        s.transform = 'scaleX(' + e.toFixed(4) + ')';
+        s.transformOrigin = '0 50%';
+        break;
+      case 'parallax':
+        s.transform = 'translate3d(0,' + ((0.5 - q) * (it.speed || 90)).toFixed(2) + 'px,0)';
+        break;
+      case 'drift':
+        // Deriva lateral + giro suave: da vida a los objetos grandes.
+        s.transform = 'translate3d(' + ((0.5 - q) * (it.speed || 60)).toFixed(2) + 'px,'
+          + ((0.5 - q) * (it.speed || 60) * 0.5).toFixed(2) + 'px,0) rotate('
+          + ((q - 0.5) * 8).toFixed(2) + 'deg)';
+        break;
+      case 'words':
+      case 'chars': {
+        // Cada palabra/letra tiene su propia ventana dentro del progreso del
+        // bloque: el titular se "escribe" conforme bajas, y se deshace al subir.
+        var n = it.parts.length, spread = 0.55;
+        for (var i = 0; i < n; i++) {
+          var st = (i / n) * spread;
+          var wp = easeOut(clamp((p - st) / (1 - spread), 0, 1));
+          var ps = it.parts[i].style;
+          ps.opacity = wp;
+          ps.transform = 'translate3d(0,' + ((1 - wp) * 0.85).toFixed(3) + 'em,0)';
+        }
+        break;
+      }
+      case 'stagger': {
+        var m = it.parts.length, sp = 0.5;
+        for (var j = 0; j < m; j++) {
+          var st2 = (j / m) * sp;
+          var cp = easeOut(clamp((p - st2) / (1 - sp), 0, 1));
+          var cs = it.parts[j].style;
+          cs.opacity = cp;
+          cs.transform = 'translate3d(0,' + ((1 - cp) * 34).toFixed(2) + 'px,0)';
+        }
+        break;
+      }
+    }
+
+    // data-fx-pin: al salir por arriba, el bloque se aleja y se apaga en vez
+    // de desaparecer de golpe. Es el gesto que hace que el hero no "corte".
+    if (it.pin && r.top < 0) {
+      var out = clamp(-r.top / (vh * 0.9), 0, 1);
+      s.opacity = String(1 - out);
+      s.transform = 'translate3d(0,' + (out * -60).toFixed(1) + 'px,0) scale(' + (1 - out * 0.06).toFixed(4) + ')';
+      s.filter = out > 0.02 ? 'blur(' + (out * 7).toFixed(2) + 'px)' : '';
+    }
+  }
+
+  // Cintas: en vez de girar solas a velocidad fija, las mueve el scroll (y la
+  // inercia). Es un detalle pequeño que se nota muchísimo. Van en su propio
+  // bucle continuo (son 1-2 elementos) para no obligar al resto del motor a
+  // redibujar 30 veces por segundo sin motivo.
+  var tracks = [];
+  function tick() {
+    for (var i = 0; i < tracks.length; i++) {
+      var t = tracks[i];
+      t.off += t.dir * 0.4 + vel * t.dir * 0.35;
+      var w = t.el.scrollWidth / 2;
+      if (w > 0) { if (t.off > w) t.off -= w; if (t.off < -w) t.off += w; }
+      t.el.style.transform = 'translate3d(' + (-t.off).toFixed(2) + 'px,0,0)';
+    }
+    vel *= 0.9;
+    if (tracks.length) requestAnimationFrame(tick);
+  }
+
+  // El rótulo del borde es el de la última sección cuyo inicio ya has pasado.
+  function railFor(vh) {
+    var mid = vh * 0.45, txt = '';
+    for (var i = 0; i < rails.length; i++) {
+      if (rails[i].getBoundingClientRect().top <= mid) txt = rails[i].dataset.rail;
+    }
+    if (txt === railNow || !railL) return;
+    railNow = txt;
+    [railL, railR].forEach(function (rail) {
+      var sp = rail.firstChild;
+      sp.classList.add('out');
+      setTimeout(function () { sp.textContent = txt; sp.classList.remove('out'); }, 260);
+    });
+  }
+
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var vh = innerHeight;
+    var y = scrollY;
+    vel += ((y - lastY) - vel) * 0.25;
+    lastY = y;
+    for (var i = 0; i < els.length; i++) apply(els[i], vh);
+    railFor(vh);
+    if (bar) {
+      var max = document.documentElement.scrollHeight - vh;
+      bar.style.transform = 'scaleX(' + (max > 0 ? clamp(y / max, 0, 1) : 0).toFixed(4) + ')';
+    }
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+
+  function init() {
+    root.classList.add('fx-on');
+    bar = document.createElement('div'); bar.className = 'fx-progress'; document.body.appendChild(bar);
+    railL = document.createElement('div'); railL.className = 'fx-rail l'; railL.appendChild(document.createElement('span'));
+    railR = document.createElement('div'); railR.className = 'fx-rail r'; railR.appendChild(document.createElement('span'));
+    document.body.appendChild(railL); document.body.appendChild(railR);
+    register();
+    tracks = [].slice.call(document.querySelectorAll('[data-fx-marquee]')).map(function (el, i) {
+      el.style.animation = 'none';
+      return { el: el, off: 0, dir: i % 2 ? -1 : 1 };
+    });
+    addEventListener('scroll', request, { passive: true });
+    addEventListener('resize', function () { register(); request(); }, { passive: true });
+    // Las imágenes cambian la altura de los bloques al cargar: recalcula.
+    addEventListener('load', function () { register(); request(); });
+    if (tracks.length) requestAnimationFrame(tick);
+    request();
+  }
+  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 </body>
 </html>

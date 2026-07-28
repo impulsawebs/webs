@@ -5,209 +5,229 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Dr. A. Martínez Mompeán — Odontología general y estética dental en Badalona</title>
 <meta name="description" content="Dr. A. Martínez Mompeán: Odontología general y estética dental en Badalona. Pide tu cita." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="../fonts/pair-1.css" rel="stylesheet" />
-<script type="importmap">
-{ "imports": {
-  "three": "../vendor/three/three.module.js",
-  "three/addons/": "../vendor/three/"
-} }
-</script>
 <style>
   :root {
     --brand: #4F46E5;
     --brand-dark: #3e37b3;
-    --brand-soft: color-mix(in srgb, #4F46E5 55%, #FFFFFF);
     --brand-deep: #473fce;
-    --void: #04050a;
-    --paper: #FBF9F5;
-    --text: #F5F3EE;
-    --muted: rgba(245,243,238,.62);
-    --line: rgba(255,255,255,.12);
-    --radius: 10px;
+    --brand-abyss: #161440;
+    --paper: #F4F0E7;
+    --paper-2: #EAE4D6;
+    --ink: #17140D;
+    --muted: #6A6455;
+    --line: rgba(23, 20, 13, 0.12);
+    --line-2: rgba(23, 20, 13, 0.22);
     --radius-lg: 18px;
+    --radius: 10px;
     --font-display: 'Fraunces', serif;
     --font-body: 'Inter', system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin:0; background: var(--void); color: var(--text); font-family: var(--font-body);
-    line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  h1,h2 { font-family: var(--font-display); font-weight:400; margin:0; line-height:.98;
-    letter-spacing:-.02em; text-wrap:balance; }
-  h3 { font-family: var(--font-body); font-weight:600; margin:0; letter-spacing:-.01em; }
-  p { margin:0; color: var(--muted); }
+  body {
+    margin: 0; font-family: var(--font-body); color: var(--ink); background: var(--paper);
+    line-height: 1.55; -webkit-font-smoothing: antialiased; position: relative; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+    opacity: .04; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  h1, h2 { font-family: var(--font-display); font-weight: 400; margin: 0; line-height: .96; letter-spacing: -0.02em; text-wrap: balance; }
+  h3 { font-family: var(--font-body); font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  p { margin: 0; color: var(--muted); }
   a { color: inherit; }
-  em { font-style: italic; color: var(--brand-soft); }
-  .container { max-width:1180px; margin:0 auto; padding:0 1.5rem; }
-  .eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-size:.74rem; font-weight:700;
-    letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
-  .eyebrow::before { content:''; width:18px; height:1.5px; background:var(--brand-soft); }
+  .accent { font-style: italic; color: var(--brand-dark); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.75rem; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-body);
+    font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--brand-dark);
+  }
+  .eyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--brand); }
 
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; font-family:var(--font-body);
-    background:var(--paper); color:#16140F; font-weight:600; font-size:.93rem; padding:.9rem 1.7rem;
-    border-radius:999px; text-decoration:none; border:none; cursor:pointer;
-    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease; }
-  .btn:hover { transform:translateY(-2px); box-shadow:0 0 40px -6px color-mix(in srgb, var(--brand) 70%, transparent); }
-  .btn-ghost { background:transparent; color:inherit; border:1px solid var(--line); }
-  .btn-ghost:hover { border-color:var(--brand-soft); }
+  /* Custom cursor */
+  .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; border-radius: 50%; pointer-events: none; z-index: 1000; mix-blend-mode: difference; }
+  .cursor-dot { width: 7px; height: 7px; background: #fff; transform: translate(-50%,-50%); }
+  .cursor-ring { width: 34px; height: 34px; border: 1.5px solid #fff; transform: translate(-50%,-50%); transition: width .25s ease, height .25s ease, background .25s ease; }
+  body.cursor-hover .cursor-ring { width: 54px; height: 54px; background: rgba(255,255,255,.15); }
+  @media (hover: none) { .cursor-dot, .cursor-ring { display: none; } }
 
-  /* ===== HERO: escena 3D a pantalla completa con bloom ===== */
-  .stage { position:fixed; inset:0; z-index:0; }
-  .stage canvas { display:block; width:100%; height:100%; }
-  .scrim { position:fixed; inset:0; z-index:1; pointer-events:none;
-    background:linear-gradient(180deg, rgba(4,5,10,.45) 0%, rgba(4,5,10,.30) 45%, var(--void) 100%),
-                linear-gradient(90deg, rgba(4,5,10,.55) 0%, rgba(4,5,10,.10) 55%, transparent 100%); }
-  .hero { position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column;
-    justify-content:center; padding:7rem 1.5rem 4rem; }
-  .hero-inner { max-width:1180px; margin:0 auto; width:100%; }
-  .hero .eyebrow { margin-bottom:1.6rem; opacity:0; animation:fadeUp .9s .2s forwards; }
-  /* Titular letra a letra */
-  .hero h1 { font-size:clamp(3.2rem, 9vw, 7.5rem); max-width:16ch; }
-  /* .wd mantiene la palabra entera junta: si se animan letras sueltas el
-     navegador parte las palabras a mitad ("buenas m / anos"). */
-  .hero h1 .wd { display:inline-block; white-space:nowrap; }
-  .hero h1 .ch { display:inline-block; opacity:0; transform:translateY(.5em) rotateX(-40deg);
-    animation:charIn .9s cubic-bezier(.2,.8,.2,1) forwards; }
-  @keyframes charIn { to { opacity:1; transform:none; } }
-  @keyframes fadeUp { to { opacity:1; transform:none; } }
-  .hero p.lead { font-size:1.18rem; max-width:44ch; margin-top:1.6rem; color:rgba(245,243,238,.8);
-    opacity:0; animation:fadeUp .9s 1.1s forwards; }
-  .hero-cta { display:flex; gap:.9rem; margin-top:2.3rem; flex-wrap:wrap;
-    opacity:0; animation:fadeUp .9s 1.3s forwards; }
-  .hero-hud { display:flex; align-items:center; gap:1.6rem; margin-top:3.4rem; flex-wrap:wrap;
-    padding:1rem 1.7rem; border-radius:999px; width:fit-content;
-    background:rgba(255,255,255,.05); backdrop-filter:blur(18px); border:1px solid var(--line);
-    opacity:0; animation:fadeUp .9s 1.5s forwards; }
-  .hud-item strong { font-family:var(--font-display); font-size:1.35rem; font-weight:400; display:block; }
-  .hud-item span { font-size:.72rem; color:var(--muted); }
-  .hud-divider { width:1px; height:30px; background:var(--line); }
-  .hud-chip { display:inline-flex; align-items:center; gap:.5rem; font-size:.8rem; font-weight:600; }
-  .hud-chip .dot { width:7px; height:7px; border-radius:50%; background:var(--brand-soft);
-    box-shadow:0 0 12px var(--brand); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-family: var(--font-body);
+    background: var(--ink); color: var(--paper); font-weight: 600; font-size: .95rem;
+    padding: .95rem 1.8rem; border-radius: 999px; text-decoration: none; border: none; cursor: pointer;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), background .25s ease, color .25s ease;
+    will-change: transform;
+  }
+  .btn:hover { background: var(--brand-dark); }
+  .btn-on-deep { background: var(--paper); color: var(--ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line-2); padding: calc(.95rem - 1.5px) calc(1.8rem - 1.5px); }
+  .btn-ghost:hover { border-color: var(--brand); color: var(--brand-dark); background: transparent; }
 
-  /* Indicador de scroll */
-  .scroll-cue { position:absolute; bottom:2.2rem; left:50%; transform:translateX(-50%);
-    display:flex; flex-direction:column; align-items:center; gap:.6rem; font-size:.68rem;
-    letter-spacing:.24em; text-transform:uppercase; color:var(--muted);
-    opacity:0; animation:fadeUp .9s 1.8s forwards; }
-  .scroll-cue .track { width:1px; height:44px; background:var(--line); position:relative; overflow:hidden; }
-  .scroll-cue .track::after { content:''; position:absolute; inset:0; background:var(--brand-soft);
-    transform:translateY(-100%); animation:cue 2.2s ease-in-out infinite; }
-  @keyframes cue { 50% { transform:translateY(0); } 100% { transform:translateY(100%); } }
+  /* Nav */
+  header.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .35s ease, border-color .35s ease; border-bottom: 1px solid transparent; }
+  header.nav.scrolled { background: rgba(244,240,231,.85); backdrop-filter: blur(14px); border-color: var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.75rem; }
+  .logo { font-family: var(--font-display); font-size: 1.4rem; text-decoration: none; color: var(--ink); }
+  .logo .dot { color: var(--brand); }
+  nav.links { display: flex; gap: 2.4rem; list-style: none; margin: 0; padding: 0; }
+  nav.links a { text-decoration: none; color: var(--ink); font-weight: 500; font-size: .92rem; position: relative; }
+  nav.links a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 1.5px; background: var(--brand); transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+  nav.links a:hover::after { transform: scaleX(1); }
+  .nav-actions { display: flex; align-items: center; gap: .85rem; }
+  .burger { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+  .burger span { display: block; width: 22px; height: 1.5px; background: var(--ink); margin: 5px 0; transition: transform .3s ease, opacity .3s ease; }
+  .mobile-menu { display: none; flex-direction: column; gap: .25rem; padding: 0 1.75rem; max-height: 0; overflow: hidden; opacity: 0; background: var(--paper); transition: max-height .35s ease, opacity .3s ease, padding .35s ease; }
+  .mobile-menu a { text-decoration: none; color: var(--ink); font-weight: 500; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+  .mobile-menu.open { max-height: 340px; opacity: 1; padding: .5rem 1.75rem 1.5rem; }
 
-  /* ===== Nav ===== */
-  header.nav { position:fixed; top:0; left:0; right:0; z-index:50; background:transparent;
-    border-bottom:1px solid transparent; transition:background .35s, border-color .35s; }
-  header.nav.scrolled { background:rgba(4,5,10,.72); backdrop-filter:blur(16px); border-color:var(--line); }
-  .nav-inner { display:flex; align-items:center; justify-content:space-between; padding:1.1rem 1.5rem; }
-  .logo { font-family:var(--font-display); font-size:1.3rem; text-decoration:none; color:inherit; }
-  .logo .dot { color:var(--brand-soft); }
-  nav.links { display:flex; gap:2.2rem; margin:0; padding:0; }
-  nav.links a { text-decoration:none; opacity:.75; font-weight:500; font-size:.9rem; transition:opacity .2s; }
-  nav.links a:hover { opacity:1; }
-  .nav-actions { display:flex; align-items:center; gap:.8rem; }
-  .burger { display:none; background:none; border:none; cursor:pointer; padding:.5rem; }
-  .burger span { display:block; width:20px; height:1.5px; background:currentColor; margin:5px 0; }
-  .mobile-menu { display:none; flex-direction:column; padding:0 1.5rem; max-height:0; overflow:hidden;
-    opacity:0; background:rgba(4,5,10,.95); backdrop-filter:blur(14px); transition:max-height .35s, opacity .3s, padding .35s; }
-  .mobile-menu a { text-decoration:none; padding:.8rem 0; border-bottom:1px solid var(--line); }
-  .mobile-menu.open { max-height:340px; opacity:1; padding:.5rem 1.5rem 1.5rem; }
-
-  /* ===== Contenido sobre la escena ===== */
-  /* El contenido va SOBRE la escena fija: sin position+z-index quedaría
-     tapado por .stage/.scrim (que son fixed) y no se vería nada al bajar. */
-  .content { position:relative; z-index:2;
-    background:linear-gradient(180deg, transparent 0%, var(--void) 10%, var(--void) 100%); }
-  [data-reveal] { opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
-  [data-reveal].is-visible { opacity:1; transform:none; }
-  [data-reveal="stagger"] > * { opacity:0; transform:translateY(16px); transition:opacity .55s, transform .55s; }
-  [data-reveal="stagger"].is-visible > * { opacity:1; transform:none; }
+  /* Reveal */
+  [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+  [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+  [data-reveal="stagger"] > * { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+  [data-reveal="stagger"].is-visible > * { opacity: 1; transform: translateY(0); }
   [data-reveal="stagger"].is-visible > *:nth-child(1){transition-delay:.05s}
   [data-reveal="stagger"].is-visible > *:nth-child(2){transition-delay:.13s}
   [data-reveal="stagger"].is-visible > *:nth-child(3){transition-delay:.21s}
   [data-reveal="stagger"].is-visible > *:nth-child(4){transition-delay:.29s}
 
-  section { padding:6.5rem 0; }
-  .section-head { margin-bottom:3.2rem; }
-  .section-head.center { text-align:center; }
-  .section-head h2 { font-size:clamp(2rem,4.5vw,3.4rem); margin-top:.9rem; }
-  .section-head p { margin-top:1rem; max-width:52ch; }
-  .section-head.center p { margin-left:auto; margin-right:auto; }
+  /* ===== Hero — light, kinetic, liquid WebGL blob ===== */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 7rem 1.75rem 4rem; }
+  .hero-blob { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; filter: blur(46px) saturate(1.15); opacity: .82; pointer-events: none; }
+  .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
+  .hero .eyebrow { margin-bottom: 1.75rem; }
+  .hero h1 { font-size: clamp(3.4rem, 9vw, 8rem); max-width: 15ch; }
+  .hero p.lead { font-size: 1.25rem; max-width: 44ch; margin-top: 1.75rem; color: var(--ink); opacity: .72; }
+  .hero-cta { display: flex; gap: 1rem; margin-top: 2.4rem; flex-wrap: wrap; }
+  .hero-hud { display: flex; align-items: center; gap: 2rem; margin-top: 3.5rem; flex-wrap: wrap; }
+  .hud-item strong { font-family: var(--font-display); font-size: 2rem; font-weight: 400; display: block; font-variant-numeric: tabular-nums; }
+  .hud-item span { font-size: .78rem; color: var(--muted); }
+  .hud-divider { width: 1px; height: 34px; background: var(--line-2); }
+  .hud-chip { display: inline-flex; align-items: center; gap: .55rem; font-size: .82rem; font-weight: 600; border: 1.5px solid var(--line-2); border-radius: 999px; padding: .5rem 1rem .5rem .8rem; }
+  .hud-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
 
-  .ticker-band { border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    background:rgba(255,255,255,.02); }
-  .ticker { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; padding:3.2rem 1.5rem; text-align:center; }
-  .ticker-num { font-family:var(--font-display); font-size:clamp(1.4rem,2.6vw,2rem); }
-  .ticker-label { font-size:.85rem; color:var(--muted); margin-top:.4rem; }
+  /* Kinetic headline: word masks with skew */
+  .reveal-line { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; }
+  .reveal-line .word { display: inline-block; transform: translateY(110%) rotate(4deg); opacity: 0; animation: wIn 1s cubic-bezier(.16,1,.3,1) forwards; animation-play-state: paused; }
+  body.loaded .reveal-line .word { animation-play-state: running; }
+  @keyframes wIn { to { transform: translateY(0) rotate(0); opacity: 1; } }
+  .hero .eyebrow, .hero .lead, .hero-cta, .hero-hud { opacity: 0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
+  body.loaded .hero .eyebrow { opacity: 1; transform: none; }
+  body.loaded .hero .lead { opacity: 1; transform: none; transition-delay: 1s; }
+  body.loaded .hero-cta { opacity: 1; transform: none; transition-delay: 1.15s; }
+  body.loaded .hero-hud { opacity: 1; transform: none; transition-delay: 1.3s; }
 
-  .svc-list { border-top:1px solid var(--line); }
-  .svc-row { display:grid; grid-template-columns:auto 44px 1fr auto; gap:1.6rem; align-items:center;
-    padding:2rem 0; border-bottom:1px solid var(--line); transition:background .3s, padding-left .3s; }
-  .svc-row:hover { background:rgba(255,255,255,.03); padding-left:1rem; }
-  .svc-idx { font-size:.74rem; letter-spacing:.14em; color:var(--muted); }
-  .svc-ic svg { width:30px; height:30px; stroke:var(--brand-soft); fill:none; stroke-width:1.2; }
-  .svc-body h3 { font-family:var(--font-display); font-weight:400; font-size:1.5rem; display:flex;
-    align-items:center; gap:.9rem; flex-wrap:wrap; }
-  .svc-body p { margin-top:.5rem; font-size:.96rem; }
-  .svc-tag { font-size:.64rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-    color:var(--brand-soft); border:1px solid color-mix(in srgb, var(--brand) 50%, transparent);
-    padding:.3rem .7rem; border-radius:999px; }
-  .svc-arrow svg { width:22px; height:22px; stroke:var(--muted); fill:none; }
+  .scroll-cue { position: absolute; bottom: 1.75rem; left: 50%; transform: translateX(-50%); z-index: 2; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+  .scroll-cue .line { width: 1px; height: 32px; background: var(--line-2); overflow: hidden; position: relative; }
+  .scroll-cue .line::after { content: ''; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--brand); animation: cue 1.8s ease-in-out infinite; }
+  @keyframes cue { to { top: 100%; } }
 
-  .quote-section .quote-wrap { display:flex; gap:1.6rem; max-width:820px; }
-  .quote-mark { font-family:var(--font-display); font-size:4rem; color:var(--brand-soft); line-height:1; }
-  blockquote { margin:0; font-family:var(--font-display); font-style:italic; font-size:clamp(1.3rem,2.6vw,1.9rem);
-    line-height:1.35; }
-  .quote-source { margin-top:1rem; font-size:.86rem; font-weight:600; color:var(--muted); }
+  /* Ticker */
+  .ticker-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-2); }
+  .ticker { display: flex; }
+  .ticker > div { flex: 1; padding: 2.75rem 1.5rem; text-align: center; position: relative; }
+  .ticker > div + div::before { content: ''; position: absolute; left: 0; top: 25%; bottom: 25%; width: 1px; background: var(--line); }
+  .ticker-num { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-variant-numeric: tabular-nums; }
+  .ticker-label { font-size: .86rem; color: var(--muted); margin-top: .3rem; }
 
-  .quote-trio { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
-  .qcard { background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:var(--radius-lg);
-    padding:2rem; display:flex; flex-direction:column; gap:.9rem; }
-  .qcard p { font-family:var(--font-display); font-style:italic; font-size:1.15rem; line-height:1.35; color:var(--text); }
-  .qcard .who { margin-top:auto; font-size:.8rem; font-weight:600; color:var(--muted); }
+  section { padding: 6rem 0; position: relative; }
+  .section-head { max-width: 660px; margin: 0 auto 3.25rem; }
+  .section-head.center { text-align: center; }
+  .section-head h2 { font-size: clamp(2rem, 3.6vw, 3rem); }
+  .section-head p { margin-top: 1rem; font-size: 1.05rem; }
 
-  .proceso-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
-  .step { border:1px solid var(--line); border-radius:var(--radius-lg); padding:2rem; }
-  .step-n { font-family:var(--font-display); font-size:2rem; color:var(--brand-soft); }
-  .step h3 { margin:.6rem 0 .5rem; font-size:1.1rem; }
+  .glow-card { position: relative; }
 
-  .marquee { overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:1.4rem 0; }
-  .marquee-track { display:flex; width:max-content; animation:marq 30s linear infinite; }
-  .marquee-chunk { display:flex; align-items:center; }
-  .marquee .item { font-family:var(--font-display); font-size:1.5rem; padding:0 1.6rem; color:var(--muted); }
-  .marquee .sep { color:var(--brand-soft); }
-  @keyframes marq { to { transform:translateX(-50%); } }
+  /* Services — index rows on light */
+  .svc-list { border-top: 1px solid var(--line-2); }
+  .svc-row { position: relative; display: grid; grid-template-columns: 3.6rem 3.2rem 1fr auto; gap: 1.6rem; align-items: center; padding: 2.4rem .9rem; border-bottom: 1px solid var(--line); transition: background .35s ease, padding-left .45s cubic-bezier(.2,.8,.2,1); }
+  .svc-row:hover { background: var(--paper-2); padding-left: 2rem; }
+  .svc-idx { font-size: .82rem; font-weight: 700; letter-spacing: .1em; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .svc-ic svg { width: 34px; height: 34px; stroke: var(--brand-dark); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+  .svc-row:hover .svc-ic svg { transform: scale(1.14) rotate(-5deg); }
+  .svc-body h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2.1rem); display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; transition: color .3s ease; }
+  .svc-row:hover .svc-body h3 { color: var(--brand-dark); }
+  .svc-body p { font-size: .96rem; margin-top: .45rem; max-width: 58ch; }
+  .svc-tag { font-family: var(--font-body); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand-dark); border: 1.5px solid var(--brand); border-radius: 999px; padding: .28rem .7rem; white-space: nowrap; }
+  .svc-arrow svg { width: 28px; height: 28px; stroke: var(--ink); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: .3; transition: transform .4s cubic-bezier(.2,.8,.2,1), opacity .3s ease, stroke .3s ease; }
+  .svc-row:hover .svc-arrow svg { transform: translateX(10px); opacity: 1; stroke: var(--brand-dark); }
 
-  .finale { text-align:center; }
-  .finale h2 { font-size:clamp(2.4rem,6vw,4.5rem); }
-  .tel-giant { display:inline-block; margin-top:1.6rem; font-family:var(--font-display);
-    font-size:clamp(2rem,5vw,3.4rem); text-decoration:none; color:var(--brand-soft); }
-  .finale-meta { margin-top:1.4rem; display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap;
-    font-size:.88rem; color:var(--muted); }
-  .finale-meta .sep { color:var(--brand-soft); }
-  .finale-chip { display:inline-flex; align-items:center; gap:.55rem; margin-top:1.8rem; font-size:.86rem;
-    border:1px solid var(--line); border-radius:999px; padding:.6rem 1.2rem; }
-  .finale-chip .dot { width:7px; height:7px; border-radius:50%; background:#22c55e; }
+  /* Services — feature blocks on light */
+  .svc-features { display: grid; gap: 1.5rem; }
+  .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; padding: 2.75rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--paper); transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease; }
+  .feature-row:hover { border-color: var(--brand); box-shadow: 0 30px 60px -30px rgba(23,20,13,.2); transform: translateY(-4px); }
+  .feature-row:nth-child(even) .feature-visual { order: 2; }
+  .feature-visual { aspect-ratio: 4/3; border-radius: var(--radius); background: linear-gradient(135deg, var(--brand), var(--brand-deep)); display: flex; align-items: center; justify-content: center; }
+  .feature-visual svg { width: 38%; height: 38%; stroke: var(--paper); fill: none; stroke-width: 1; opacity: .92; }
+  .feature-copy .svc-idx { display: inline-block; margin-bottom: .8rem; }
+  .feature-copy h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: .65rem; }
+  .feature-copy p { font-size: 1rem; max-width: 44ch; }
 
-  footer { border-top:1px solid var(--line); padding:2.4rem 0; font-size:.82rem; color:var(--muted); }
-  .footer-inner { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+  /* Marquee */
+  .marquee { overflow: hidden; padding: 1.6rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink); }
+  .marquee-track { display: inline-flex; white-space: nowrap; animation: mq 32s linear infinite; }
+  .marquee span.item { font-family: var(--font-display); font-style: italic; font-size: 1.9rem; color: var(--paper); padding: 0 1.5rem; }
+  .marquee span.sep { color: var(--brand); font-size: .8rem; align-self: center; }
+  @keyframes mq { to { transform: translateX(-50%); } }
 
-  @media (max-width:900px) {
-    .quote-trio, .proceso-grid { grid-template-columns:1fr; }
-    .ticker { grid-template-columns:1fr; gap:1.6rem; }
+  /* Quote — big editorial on light */
+  .quote-section { background: var(--paper-2); overflow: hidden; }
+  .quote-section::before { content: ''; position: absolute; left: 50%; top: 50%; width: 700px; height: 360px; transform: translate(-50%,-50%); pointer-events: none; background: radial-gradient(closest-side, color-mix(in srgb, var(--brand) 14%, transparent), transparent); }
+  .quote-wrap { position: relative; max-width: 900px; margin: 0 auto; text-align: center; }
+  .quote-mark { display: block; font-family: var(--font-display); font-style: italic; font-size: 5rem; line-height: .5; color: var(--brand); margin-bottom: 1.5rem; }
+  blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.7rem, 3.6vw, 2.7rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .quote-source { margin-top: 2rem; display: inline-flex; align-items: center; gap: .9rem; font-size: .9rem; font-weight: 600; color: var(--muted); }
+  .quote-source::before, .quote-source::after { content: ''; width: 28px; height: 1px; background: var(--line-2); }
+
+  /* Trio cards on light */
+  .quote-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .qcard { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 2.25rem; background: var(--paper); display: flex; flex-direction: column; gap: 1.1rem; transition: transform .3s ease, box-shadow .3s ease; }
+  .qcard:hover { transform: translateY(-5px); box-shadow: 0 30px 60px -30px rgba(23,20,13,.18); }
+  .qcard .stars { color: var(--brand); letter-spacing: .15em; }
+  .qcard p { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.35; color: var(--ink); }
+  .qcard .who { margin-top: auto; font-size: .84rem; font-weight: 600; color: var(--muted); }
+
+  /* Proceso */
+  .proceso-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .step { padding: 2.25rem; border-top: 3px solid var(--brand); }
+  .step .step-n { font-family: var(--font-display); font-size: 3rem; line-height: 1; color: var(--brand-dark); display: block; margin-bottom: .85rem; font-variant-numeric: tabular-nums; }
+  .step h3 { font-size: 1.1rem; margin-bottom: .45rem; }
+  .step p { font-size: .95rem; }
+
+  /* Finale — solid brand panel on light */
+  .finale { padding: 0; }
+  .finale .container { background: linear-gradient(140deg, var(--brand-deep), var(--brand-abyss)); color: var(--paper); border-radius: 32px; padding: 6.5rem 2rem; text-align: center; position: relative; overflow: hidden; max-width: 1140px; }
+  .finale h2 { font-size: clamp(3rem, 8vw, 5.5rem); color: var(--paper); }
+  .finale .eyebrow { color: rgba(244,240,231,.7); justify-content: center; }
+  .finale .eyebrow::before { background: var(--paper); }
+  .tel-giant { display: inline-block; margin-top: 1.9rem; font-family: var(--font-display); font-variant-numeric: tabular-nums; font-size: clamp(2rem, 5.5vw, 3.8rem); color: var(--paper); text-decoration: none; position: relative; white-space: nowrap; }
+  .tel-giant::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--paper); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+  .tel-giant:hover::after { transform: scaleX(1); }
+  .finale-meta { margin-top: 2.4rem; display: flex; gap: .9rem; justify-content: center; align-items: center; flex-wrap: wrap; color: rgba(244,240,231,.72); font-size: .95rem; }
+  .finale-meta .sep { color: var(--paper); font-size: .55rem; }
+  .finale-chip { display: inline-flex; align-items: center; gap: .55rem; margin-top: 2.6rem; background: rgba(244,240,231,.12); border: 1px solid rgba(244,240,231,.24); border-radius: 999px; padding: .55rem 1.1rem .55rem .8rem; font-size: .84rem; font-weight: 600; }
+  .finale-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ADE80; }
+
+  footer { padding: 3rem 0 2rem; border-top: 1px solid var(--line); color: var(--muted); }
+  .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+  footer .logo { color: var(--ink); }
+  footer .fine { font-size: .78rem; color: var(--muted); margin-top: 1.75rem; text-align: center; opacity: .7; }
+
+  @media (max-width: 860px) {
+    nav.links, .nav-actions .btn { display: none; }
+    .burger { display: block; } .mobile-menu { display: flex; }
+    .hero { min-height: 92vh; padding-top: 6rem; }
+    .hero-hud { gap: 1.25rem; }
+    .ticker { flex-wrap: wrap; } .ticker > div { flex: 1 1 50%; } .ticker > div:nth-child(2)::before { display:none; }
+    .svc-row { grid-template-columns: 2.4rem 1fr auto; gap: 1rem; padding: 1.8rem .25rem; } .svc-row:hover{padding-left:.25rem} .svc-idx{display:none} .svc-ic svg{width:26px;height:26px}
+    .feature-row { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.75rem; } .feature-row:nth-child(even) .feature-visual { order: 0; }
+    .quote-trio, .proceso-grid { grid-template-columns: 1fr; }
+    .finale .container { padding: 4.5rem 1.5rem; border-radius: 24px; }
   }
-  @media (max-width:768px) {
-    nav.links, .nav-actions .btn { display:none; }
-    .burger { display:block; }
-    .mobile-menu { display:flex; }
-    .svc-row { grid-template-columns:auto 1fr; gap:1rem; }
-    .svc-ic, .svc-arrow { display:none; }
-    .hero-hud { gap:1rem 1.2rem; padding:.9rem 1.2rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero h1 .ch, .hero .eyebrow, .hero p.lead, .hero-cta, .hero-hud, .scroll-cue { animation:none; opacity:1; transform:none; }
-    .marquee-track { animation:none; }
-  }
+  @media (prefers-reduced-motion: reduce) { *{animation-duration:.001ms!important;transition-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important} }
 </style>
 <meta name="theme-color" content="#4F46E5" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%234F46E5%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2238%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E" />
@@ -220,11 +240,13 @@
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dentist","name":"Dr. A. Martínez Mompeán","description":"Dr. A. Martínez Mompeán: Odontología general y estética dental en Badalona. Pide tu cita — trato cercano y presupuesto claro.","telephone":"+34933830127","url":"https://impulsawebs.github.io/webs/p/martinez.html","areaServed":"Badalona","address":{"@type":"PostalAddress","addressLocality":"Badalona","addressCountry":"ES"}}</script>
 </head>
-<body>
+<body class="layout-center">
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
 <header class="nav" id="siteNav">
   <div class="nav-inner">
-    <a class="logo" href="#top">Dr. A.<span class="dot">.</span></a>
+    <a href="#top" class="logo">Dr. A.<span class="dot">.</span></a>
     <nav class="links">
       <a href="#servicios">Servicios</a>
       <a href="#nosotros">Nosotros</a>
@@ -233,57 +255,55 @@
     <div class="nav-actions">
       <a class="btn btn-ghost" href="tel:+34933830127">+34933830127</a>
       <a class="btn" href="#contacto">Pide tu cita gratuita</a>
-      <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#servicios">Servicios</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#contacto">Contacto</a>
+    <a class="btn" href="tel:+34933830127">Llamar: +34933830127</a>
   </div>
 </header>
 
-<div class="stage"><canvas id="scene"></canvas></div>
-<div class="scrim"></div>
-
 <main id="top">
-  <section class="hero">
-    <div class="hero-inner">
+  <section class="hero" id="heroSection">
+    <canvas class="hero-blob" id="heroBlob" aria-hidden="true"></canvas>
+    <div class="hero-inner" data-fx="fade" data-fx-pin>
       <span class="eyebrow">Clínica dental en Badalona</span>
-      <h1 id="heroTitle"><span class="reveal-line"><span class="word " style="animation-delay:0.000s">Sonríe</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.055s">con</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.110s">confianza</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.165s">en</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.220s">Badalona</span></span></h1>
+      <h1><span class="reveal-line"><span class="word " style="animation-delay:0.000s">Sonríe</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.055s">con</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.110s">confianza</span></span> <span class="reveal-line"><span class="word " style="animation-delay:0.165s">en</span></span> <span class="reveal-line"><span class="word accent" style="animation-delay:0.220s">Badalona</span></span></h1>
       <p class="lead">Llevamos años cuidando las sonrisas de Badalona con un equipo que se implica de verdad.</p>
       <div class="hero-cta">
-        <a class="btn" href="#contacto">Pide tu cita gratuita</a>
+        <a class="btn" id="magneticCta" href="#contacto">Pide tu cita gratuita</a>
         <a class="btn btn-ghost" href="tel:+34933830127">Llamar ahora</a>
       </div>
       <div class="hero-hud">
-        <div class="hud-item"><strong>Trato cercano</strong><span>te explicamos cada paso</span></div>
+        <div class="hud-item"><strong>Sin compromiso</strong><span>primera visita</span></div>
         <div class="hud-divider"></div>
         <div class="hud-item"><strong>Precio cerrado</strong><span>presupuesto por escrito</span></div>
         <div class="hud-divider"></div>
         <div class="hud-chip"><span class="dot"></span>Te atendemos pronto</div>
       </div>
     </div>
-    <div class="scroll-cue" aria-hidden="true"><span class="track"></span>Desliza</div>
+    <div class="scroll-cue" aria-hidden="true"><span class="line"></span>Desliza</div>
   </section>
 
-  <div class="content">
-  <div class="ticker-band">
-    <div class="container ticker" data-reveal="stagger">
+  <div class="ticker-band" data-rail="Primera visita sin compromiso">
+    <div class="container ticker" data-fx="stagger">
       <div><div class="ticker-num">Sin compromiso</div><div class="ticker-label">Primera visita para valorarte y explicarte, sin presión.</div></div>
       <div><div class="ticker-num">Precio cerrado</div><div class="ticker-label">Presupuesto por escrito antes de empezar. Sin sorpresas.</div></div>
       <div><div class="ticker-num">Trato cercano</div><div class="ticker-label">Te lo contamos claro, sin tecnicismos.</div></div>
     </div>
   </div>
 
-  <section id="servicios">
+  <section id="servicios" data-rail="Todo lo que tu sonrisa necesita">
     <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow" style="margin-bottom:.9rem;">Qué hacemos</span>
-        <h2>Todo lo que tu sonrisa necesita</h2>
-        <p>Tratamientos pensados para cada etapa, con la última tecnología y un equipo cercano.</p>
+      <div class="section-head">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;">Qué hacemos</span>
+        <h2 data-fx="words">Todo lo que tu sonrisa necesita</h2>
+        <p data-fx="rise">Tratamientos pensados para cada etapa, con la última tecnología y un equipo cercano.</p>
       </div>
-      <div class="svc-list" data-reveal="stagger">
+      <div class="svc-list" data-fx="stagger">
         <div class="svc-row glow-card">
           <span class="svc-idx">01</span>
           <span class="svc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2c-1.7-1.2-4.8-1.6-6.2.9-1.5 2.5-.3 5.2.5 7.5.8 2.4 1.1 5.4 1.9 7.4.4 1 1.8 1 2.1-.1.4-1.5.6-3.5 1.7-3.5s1.3 2 1.7 3.5c.3 1.1 1.7 1.1 2.1.1.8-2 1.1-5 1.9-7.4.8-2.3 2-5 .5-7.5-1.4-2.5-4.5-2.1-6.2-.9z"/><path d="M9.4 7.4c-.8.3-1.4 1-1.6 1.9"/></svg></span>
@@ -312,13 +332,13 @@
     </div>
   </section>
 
-  <section id="nosotros">
+  <section id="nosotros" data-rail="Por qué elegirnos">
     <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow" style="margin-bottom:.9rem;justify-content:center;">Nuestro compromiso</span>
-        <h2>Por qué elegirnos</h2>
+      <div class="section-head center">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;justify-content:center;">Nuestro compromiso</span>
+        <h2 data-fx="words">Por qué elegirnos</h2>
       </div>
-      <div class="quote-trio" data-reveal="stagger">
+      <div class="quote-trio" data-fx="stagger">
         <div class="qcard">
           <p>Presupuesto cerrado y por escrito antes de empezar.</p>
           <div class="who">Sin sorpresas</div>
@@ -336,221 +356,124 @@
   </section>
 
   <div class="marquee" aria-hidden="true">
-    <div class="marquee-track"><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">Badalona</span><span class="sep">●</span></span><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">Badalona</span><span class="sep">●</span></span></div>
+    <div class="marquee-track" data-fx-marquee><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">Badalona</span><span class="sep">●</span></span><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">Badalona</span><span class="sep">●</span></span></div>
   </div>
 
-  <section id="contacto" class="finale">
-    <div class="container" data-reveal>
-      <span class="eyebrow" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
-      <h2>Pide tu cita</h2>
-      <div><a class="tel-giant" href="tel:+34933830127">+34933830127</a></div>
-      <div class="finale-meta">
+  <section id="contacto" class="finale" data-rail="+34933830127">
+    <div class="container">
+      <span class="eyebrow" data-fx="rise" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
+      <h2 data-fx="words">Pide tu cita</h2>
+      <div><a class="tel-giant" data-fx="chars" href="tel:+34933830127">+34933830127</a></div>
+      <div class="finale-meta" data-fx="rise">
         <span>Dr. A. Martínez Mompeán</span><span class="sep">●</span>
         <span>Badalona</span><span class="sep">●</span>
         <span>Pide tu cita sin compromiso</span>
       </div>
-      <div><span class="finale-chip"><span class="dot"></span>Te llamamos nosotros si lo prefieres — tú eliges</span></div>
+      <div data-fx="scale"><span class="finale-chip"><span class="dot"></span>Te llamamos nosotros si lo prefieres — tú eliges</span></div>
     </div>
   </section>
-
-    <footer>
-      <div class="container footer-inner">
-        <span>© 2026 Dr. A. Martínez Mompeán</span>
-        <span>Odontología general y estética dental en Badalona · +34933830127</span>
-      </div>
-    </footer>
-  </div>
 </main>
 
-<script type="module">
-import * as THREE from 'three';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#top" class="logo">Dr. A.<span class="dot" style="color:var(--brand)">.</span></a>
+      <div>+34933830127 · Badalona</div>
+    </div>
+    <div class="fine">© 2026 Dr. A. Martínez Mompeán. Preview generada como propuesta comercial — no es la web definitiva.</div>
+  </div>
+</footer>
 
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const canvas = document.getElementById('scene');
-const brand = new THREE.Color('#4F46E5');
-const deep  = new THREE.Color('#473fce');
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hover = window.matchMedia('(hover: hover)').matches;
 
-const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x04050a, 0.00028);
-const camera = new THREE.PerspectiveCamera(72, innerWidth/innerHeight, 0.1, 2200);
-camera.position.set(0, 22, 300);
+  var nav = document.getElementById('siteNav');
+  var heroSection = document.getElementById('heroSection');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > (heroSection?heroSection.offsetHeight*0.7:12)); }
+  window.addEventListener('scroll', onScroll); onScroll();
 
-const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:'high-performance' });
-renderer.setSize(innerWidth, innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.62;
+  var burger = document.getElementById('burgerBtn'), menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', function(){ var o = menu.classList.toggle('open'); burger.setAttribute('aria-expanded', o?'true':'false'); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); }); });
 
-// Post-procesado: bloom real (es lo que da el aspecto "caro")
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
-composer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.62, 0.5, 0.86));
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if (reduce) revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  else if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } }); }, { threshold: .15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add('is-visible'); }); }, 2600);
+  } else revealEls.forEach(function(el){ el.classList.add('is-visible'); });
 
-// --- Campo de estrellas en 3 capas (cada una gira a distinta velocidad = profundidad)
-const starLayers = [];
-for (let L = 0; L < 3; L++) {
-  const N = 1400;
-  const pos = new Float32Array(N*3), col = new Float32Array(N*3), siz = new Float32Array(N);
-  for (let i = 0; i < N; i++) {
-    const r = 220 + Math.random()*760, th = Math.random()*Math.PI*2, ph = Math.acos(Math.random()*2-1);
-    pos[i*3]   = r*Math.sin(ph)*Math.cos(th);
-    pos[i*3+1] = r*Math.sin(ph)*Math.sin(th);
-    pos[i*3+2] = r*Math.cos(ph);
-    const c = new THREE.Color();
-    const k = Math.random();
-    if (k < 0.68) c.setHSL(0, 0, 0.82 + Math.random()*0.18);
-    else if (k < 0.9) c.copy(brand).lerp(new THREE.Color(0xffffff), 0.55);
-    else c.copy(brand);
-    col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b;
-    siz[i] = Math.random()*2 + 0.6;
-  }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(pos,3));
-  g.setAttribute('color', new THREE.BufferAttribute(col,3));
-  g.setAttribute('size', new THREE.BufferAttribute(siz,1));
-  const m = new THREE.ShaderMaterial({
-    uniforms:{ time:{value:0}, depth:{value:L} },
-    vertexShader:`attribute float size; attribute vec3 color; varying vec3 vColor;
-      uniform float time, depth;
-      void main(){ vColor=color; vec3 p=position;
-        float a = time*0.05*(1.0-depth*0.3);
-        mat2 R = mat2(cos(a),-sin(a),sin(a),cos(a)); p.xy = R*p.xy;
-        vec4 mv = modelViewMatrix*vec4(p,1.0);
-        gl_PointSize = size*(300.0/-mv.z);
-        gl_Position = projectionMatrix*mv; }`,
-    fragmentShader:`varying vec3 vColor;
-      void main(){ float d=length(gl_PointCoord-vec2(0.5)); if(d>0.5) discard;
-        gl_FragColor = vec4(vColor, 1.0-smoothstep(0.0,0.5,d)); }`,
-    transparent:true, blending:THREE.AdditiveBlending, depthWrite:false
-  });
-  const pts = new THREE.Points(g, m);
-  scene.add(pts); starLayers.push(pts);
-}
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('loaded'); }); });
 
-// --- Nebulosa: plano enorme con relieve por vértice y mezcla de color de marca
-const nebGeo = new THREE.PlaneGeometry(7000, 3600, 80, 80);
-const nebMat = new THREE.ShaderMaterial({
-  uniforms:{ time:{value:0}, c1:{value:deep}, c2:{value:brand}, opacity:{value:0.17} },
-  vertexShader:`varying vec2 vUv; varying float vE; uniform float time;
-    void main(){ vUv=uv; vec3 p=position;
-      float e = sin(p.x*0.01+time)*cos(p.y*0.01+time)*22.0; p.z += e; vE=e;
-      gl_Position = projectionMatrix*modelViewMatrix*vec4(p,1.0); }`,
-  fragmentShader:`uniform vec3 c1,c2; uniform float opacity,time; varying vec2 vUv; varying float vE;
-    void main(){ float m = sin(vUv.x*10.0+time)*cos(vUv.y*10.0+time);
-      vec3 col = mix(c1,c2,m*0.5+0.5);
-      float a = opacity*(1.0-length(vUv-0.5)*2.0); a *= 1.0+vE*0.01;
-      gl_FragColor = vec4(col, max(a,0.0)); }`,
-  transparent:true, blending:THREE.AdditiveBlending, side:THREE.DoubleSide, depthWrite:false
-});
-const nebula = new THREE.Mesh(nebGeo, nebMat);
-nebula.position.z = -1000;
-scene.add(nebula);
-
-// --- Siluetas en parallax (dan escala y horizonte)
-const ridges = [];
-[[-60,70,0.95],[-120,95,0.75],[-190,120,0.55],[-260,150,0.35]].forEach(([dist,h,op], idx) => {
-  const pts = [];
-  for (let i = 0; i <= 60; i++) {
-    const x = (i/60 - 0.5)*1400;
-    const y = Math.sin(i*0.32+idx)*h + Math.sin(i*0.11+idx*2)*h*0.55 - 120;
-    pts.push(new THREE.Vector2(x,y));
-  }
-  pts.push(new THREE.Vector2(6000,-460), new THREE.Vector2(-6000,-460));
-  const geo = new THREE.ShapeGeometry(new THREE.Shape(pts));
-  const c = deep.clone().lerp(new THREE.Color(0x04050a), 1 - op*0.8);
-  const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color:c, transparent:true, opacity:op, side:THREE.DoubleSide }));
-  mesh.position.z = dist; mesh.position.y = dist*0.55;
-  mesh.userData.baseZ = dist; mesh.userData.i = idx;
-  scene.add(mesh); ridges.push(mesh);
-});
-
-// --- Atmósfera: esfera invertida con brillo de borde
-scene.add(new THREE.Mesh(new THREE.SphereGeometry(620, 32, 32), new THREE.ShaderMaterial({
-  uniforms:{ time:{value:0}, tint:{value:brand} },
-  vertexShader:`varying vec3 vN; void main(){ vN = normalize(normalMatrix*normal);
-    gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
-  fragmentShader:`varying vec3 vN; uniform float time; uniform vec3 tint;
-    void main(){ float i = pow(0.72 - dot(vN, vec3(0.0,0.0,1.0)), 2.0);
-      float pulse = sin(time*1.6)*0.1 + 0.9;
-      gl_FragColor = vec4(tint*i*pulse, i*0.26); }`,
-  side:THREE.BackSide, blending:THREE.AdditiveBlending, transparent:true, depthWrite:false
-})));
-
-// --- Cámara: suavizado + flotación + recorrido por scroll
-const target = { x:0, y:22, z:300 };
-const smooth = { x:0, y:22, z:300 };
-function onScroll() {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  const p = max > 0 ? Math.min(scrollY / max, 1) : 0;
-  // La cámara avanza hacia el horizonte conforme se baja
-  target.x = 0;
-  target.y = 22 + p*40;
-  target.z = 300 - p*620;
-  ridges.forEach((m, i) => { m.position.z = m.userData.baseZ + p * (140 + i*90); });
-  nebula.position.z = -1000 + p*300;
-  const nav = document.getElementById('siteNav');
-  if (nav) nav.classList.toggle('scrolled', scrollY > 40);
-}
-addEventListener('scroll', onScroll, { passive:true });
-addEventListener('resize', () => {
-  camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight);
-});
-onScroll();
-
-let t0 = null;
-function frame(ts) {
-  if (t0 === null) t0 = ts;
-  const t = (ts - t0)/1000;
-  starLayers.forEach((s) => { s.material.uniforms.time.value = t; });
-  nebMat.uniforms.time.value = t*0.5;
-  scene.traverse((o) => { if (o.material && o.material.uniforms && o.material.uniforms.tint) o.material.uniforms.time.value = t; });
-  smooth.x += (target.x - smooth.x)*0.05;
-  smooth.y += (target.y - smooth.y)*0.05;
-  smooth.z += (target.z - smooth.z)*0.05;
-  camera.position.set(smooth.x + Math.sin(t*0.1)*2.2, smooth.y + Math.cos(t*0.15)*1.2, smooth.z);
-  camera.lookAt(0, 10, -600);
-  composer.render();
-  requestAnimationFrame(frame);
-}
-if (reduce) { composer.render(); } else { requestAnimationFrame(frame); }
-
-// --- Titular letra a letra, pero agrupando por PALABRA. Cada palabra es un
-// .wd (nowrap) con sus letras dentro; los espacios se dejan como texto normal
-// para que el salto de línea caiga donde el navegador quiera, nunca a mitad
-// de palabra.
-const h1 = document.getElementById('heroTitle');
-if (h1 && !reduce) {
-  const walk = (node) => {
-    [...node.childNodes].forEach((n) => {
-      if (n.nodeType === 3) {
-        const frag = document.createDocumentFragment();
-        n.textContent.split(/(\s+)/).forEach((tok) => {
-          if (!tok) return;
-          if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
-          const w = document.createElement('span'); w.className = 'wd';
-          [...tok].forEach((ch) => {
-            const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch;
-            w.appendChild(s);
-          });
-          frag.appendChild(w);
-        });
-        n.replaceWith(frag);
-      } else if (n.nodeType === 1) walk(n);
+  // Custom cursor + magnetic CTA
+  var dot = document.getElementById('cursorDot'), ring = document.getElementById('cursorRing');
+  var mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+  if (hover && !reduce) {
+    window.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'; });
+    (function loop(){ rx+=(mx-rx)*.18; ry+=(my-ry)*.18; ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('a, button, .svc-row, .qcard, .feature-row').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ document.body.classList.add('cursor-hover'); });
+      el.addEventListener('mouseleave', function(){ document.body.classList.remove('cursor-hover'); });
     });
-  };
-  walk(h1);
-  h1.querySelectorAll('.ch').forEach((s, i) => { s.style.animationDelay = (0.25 + i*0.028) + 's'; });
-}
+    var mag = document.getElementById('magneticCta');
+    if (mag) { mag.addEventListener('mousemove', function(e){ var r=mag.getBoundingClientRect(); mag.style.transform='translate('+((e.clientX-r.left-r.width/2)*.3)+'px,'+((e.clientY-r.top-r.height/2)*.4)+'px)'; });
+      mag.addEventListener('mouseleave', function(){ mag.style.transform='translate(0,0)'; }); }
+  } else { if(dot) dot.style.display='none'; if(ring) ring.style.display='none'; }
 
-// --- Reveals + menú móvil
-const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add('is-visible'); }), { threshold:0.12 });
-document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
-const b = document.getElementById('burger'), mm = document.getElementById('mobileMenu');
-if (b && mm) b.addEventListener('click', () => mm.classList.toggle('open'));
+  // Ticker counters
+  var counters = document.querySelectorAll('.ticker-num[data-count]'), done=false;
+  function run(){ if(done)return; done=true; counters.forEach(function(el){ var t=parseFloat(el.getAttribute('data-count')), d=parseInt(el.getAttribute('data-decimal')||'0',10), s=null, dur=reduce?0:1400;
+    function step(ts){ if(s===null)s=ts; var p=dur===0?1:Math.min((ts-s)/dur,1), e=1-Math.pow(1-p,3); el.textContent=d?(t*e).toFixed(d):Math.round(t*e); if(p<1)requestAnimationFrame(step); } requestAnimationFrame(step); }); }
+  if (counters.length){ if('IntersectionObserver' in window){ var cio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ run(); cio.disconnect(); } }); },{threshold:.3}); cio.observe(counters[0]); setTimeout(function(){cio.disconnect();run();},3000);} else run(); }
+
+  // Card glow tracking already handled via CSS; nothing needed.
+
+  // ===== Liquid metaball blob (Canvas 2D, blurred via CSS for a gooey look) =====
+  (function initBlob(){
+    var canvas = document.getElementById('heroBlob'); if(!canvas) return;
+    var ctx = canvas.getContext('2d'); if(!ctx) return;
+    var A = '#4F46E5', B = '#473fce';
+    var dpr = Math.min(devicePixelRatio||1, 2), W=0, H=0, lastW=-1, lastH=-1;
+    function rs(){ W=canvas.clientWidth|0; H=canvas.clientHeight|0; if(W!==lastW||H!==lastH){ canvas.width=W*dpr; canvas.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); lastW=W; lastH=H; } }
+    window.addEventListener('resize', rs);
+    // orbs viven en la mitad derecha para no invadir el titular
+    var orbs = [
+      { x:.78, y:.5, r:.26, sx:.11, sy:.13, ph:0, col:A, a:.55 },
+      { x:.92, y:.34, r:.20, sx:.15, sy:.09, ph:2, col:B, a:.5 },
+      { x:.84, y:.72, r:.22, sx:.09, sy:.16, ph:4, col:A, a:.5 },
+      { x:.66, y:.26, r:.15, sx:.13, sy:.11, ph:1, col:B, a:.45 }
+    ];
+    var mxr=.8, myr=.5, cmx=.8, cmy=.5;
+    if(hover) window.addEventListener('mousemove', function(e){ mxr=e.clientX/innerWidth; myr=e.clientY/innerHeight; });
+    function draw(t){
+      rs();
+      if(!W || !H){ return; }
+      ctx.clearRect(0,0,W,H);
+      cmx+=(mxr-cmx)*.04; cmy+=(myr-cmy)*.04;
+      var base = Math.min(W,H);
+      // círculos sólidos semitransparentes; el blur(46px) del CSS los funde
+      // en un blob líquido gooey. Robusto (sin gradientes de canvas).
+      for(var i=0;i<orbs.length;i++){
+        var o=orbs[i];
+        var ox=(o.x + Math.sin(t*o.sx+o.ph)*.05 + (cmx-.8)*.06)*W;
+        var oy=(o.y + Math.cos(t*o.sy+o.ph)*.06 + (cmy-.5)*.06)*H;
+        var rad=o.r*base*(1+Math.sin(t*.2+o.ph)*.06);
+        if(!isFinite(ox)||!isFinite(oy)||!isFinite(rad)||rad<=0){ continue; }
+        ctx.globalAlpha = o.a;
+        ctx.fillStyle = o.col;
+        ctx.beginPath(); ctx.arc(ox,oy,rad,0,6.283); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    if(reduce){ draw(0); return; }
+    var st=null;
+    function fr(ts){ if(st===null)st=ts; draw((ts-st)/1000); requestAnimationFrame(fr); }
+    requestAnimationFrame(fr);
+  })();
+})();
 </script>
 
 <style>
@@ -570,5 +493,236 @@ if (b && mm) b.addEventListener('click', () => mm.classList.toggle('open'));
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.18z"/></svg>
   </a>
 </div>
+
+<style id="fx-css">
+  /* Barra de progreso: referencia constante de dónde estás en la página. */
+  .fx-progress { position:fixed; top:0; left:0; height:2px; width:100%; z-index:80;
+    transform:scaleX(0); transform-origin:0 50%; background:var(--brand, currentColor);
+    pointer-events:none; will-change:transform; }
+  /* Rótulos verticales en los bordes. Cambian de texto según la sección que
+     estés mirando: dan continuidad y sensación de "sitio con criterio". */
+  .fx-rail { position:fixed; top:0; bottom:0; width:2.6rem; z-index:40; pointer-events:none;
+    display:none; align-items:center; justify-content:center; overflow:hidden; }
+  .fx-rail.l { left:0; } .fx-rail.r { right:0; }
+  .fx-rail span { display:block; white-space:nowrap; font-size:.62rem; font-weight:700;
+    letter-spacing:.34em; text-transform:uppercase; opacity:.4;
+    transition:opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .fx-rail.l span { transform:rotate(180deg); writing-mode:vertical-rl; }
+  .fx-rail.r span { writing-mode:vertical-rl; }
+  .fx-rail span.out { opacity:0; }
+  @media (min-width:1100px) { .fx-rail { display:flex; } }
+  /* Las palabras/letras partidas no deben romper el texto ni el copiar-pegar. */
+  .fx-w { display:inline-block; white-space:nowrap; }
+  .fx-c { display:inline-block; }
+  html.fx-on [data-fx] { will-change:transform, opacity; }
+  @media (prefers-reduced-motion: reduce) { .fx-progress, .fx-rail { display:none; } }
+</style>
+<script>
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var root = document.documentElement;
+  var els = [], rails = [], bar = null, railL = null, railR = null;
+  var lastY = scrollY, vel = 0, railNow = '';
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  // Suavizado: el movimiento no debe ser lineal o parece una hoja de cálculo.
+  function ease(p) { return p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3)/2; }
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+
+  // Parte el texto en palabras (y opcionalmente letras) SIN romper palabras a
+  // mitad: cada palabra es un inline-block nowrap.
+  function split(el, chars) {
+    if (el.dataset.fxSplit) return;
+    el.dataset.fxSplit = '1';
+    var walk = function (node) {
+      [].slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (tok) {
+            if (!tok) return;
+            if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span'); w.className = 'fx-w';
+            if (chars) {
+              [].slice.call(tok).forEach(function (c) {
+                var s = document.createElement('span'); s.className = 'fx-c'; s.textContent = c;
+                w.appendChild(s);
+              });
+            } else { w.textContent = tok; }
+            frag.appendChild(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains('fx-w')) walk(n);
+      });
+    };
+    walk(el);
+  }
+
+  function register() {
+    els = [];
+    [].slice.call(document.querySelectorAll('[data-fx]')).forEach(function (el) {
+      var kind = el.dataset.fx;
+      var item = { el: el, kind: kind, speed: parseFloat(el.dataset.fxSpeed || '0') || 0,
+                   from: el.dataset.fxFrom || 'up', parts: null, pin: 'fxPin' in el.dataset };
+      if (kind === 'words' || kind === 'chars') {
+        split(el, kind === 'chars');
+        item.parts = [].slice.call(el.querySelectorAll(kind === 'chars' ? '.fx-c' : '.fx-w'));
+      } else if (kind === 'stagger') {
+        item.parts = [].slice.call(el.children);
+      }
+      els.push(item);
+    });
+    rails = [].slice.call(document.querySelectorAll('[data-rail]'));
+  }
+
+  function apply(it, vh) {
+    var el = it.el, r = el.getBoundingClientRect();
+    // Fuera de la ventana con margen: no gastes fotogramas en ello.
+    if (r.bottom < -vh * 0.6 || r.top > vh * 1.6) return;
+
+    // p = progreso de ENTRADA (0 cuando el borde superior toca abajo del todo,
+    // 1 cuando ha subido un tercio de pantalla). q = progreso de TRAVESÍA
+    // completa por la ventana, para parallax.
+    var p = clamp((vh - r.top) / (vh * 0.62), 0, 1);
+    var q = clamp((vh - r.top) / (vh + r.height), 0, 1);
+    var e = easeOut(p), s = el.style;
+
+    switch (it.kind) {
+      case 'rise':
+        s.opacity = e;
+        s.transform = 'translate3d(0,' + ((1 - e) * 46).toFixed(2) + 'px,0)';
+        break;
+      case 'fade':
+        s.opacity = e;
+        break;
+      case 'scale':
+        s.opacity = e;
+        s.transform = 'scale(' + (0.93 + e * 0.07).toFixed(4) + ')';
+        break;
+      case 'clip':
+        s.opacity = e < 0.05 ? 0 : 1;
+        s.clipPath = it.from === 'left'
+          ? 'inset(0 ' + ((1 - e) * 100).toFixed(2) + '% 0 0)'
+          : 'inset(' + ((1 - e) * 105).toFixed(2) + '% 0 0 0)';
+        break;
+      case 'line':
+        s.transform = 'scaleX(' + e.toFixed(4) + ')';
+        s.transformOrigin = '0 50%';
+        break;
+      case 'parallax':
+        s.transform = 'translate3d(0,' + ((0.5 - q) * (it.speed || 90)).toFixed(2) + 'px,0)';
+        break;
+      case 'drift':
+        // Deriva lateral + giro suave: da vida a los objetos grandes.
+        s.transform = 'translate3d(' + ((0.5 - q) * (it.speed || 60)).toFixed(2) + 'px,'
+          + ((0.5 - q) * (it.speed || 60) * 0.5).toFixed(2) + 'px,0) rotate('
+          + ((q - 0.5) * 8).toFixed(2) + 'deg)';
+        break;
+      case 'words':
+      case 'chars': {
+        // Cada palabra/letra tiene su propia ventana dentro del progreso del
+        // bloque: el titular se "escribe" conforme bajas, y se deshace al subir.
+        var n = it.parts.length, spread = 0.55;
+        for (var i = 0; i < n; i++) {
+          var st = (i / n) * spread;
+          var wp = easeOut(clamp((p - st) / (1 - spread), 0, 1));
+          var ps = it.parts[i].style;
+          ps.opacity = wp;
+          ps.transform = 'translate3d(0,' + ((1 - wp) * 0.85).toFixed(3) + 'em,0)';
+        }
+        break;
+      }
+      case 'stagger': {
+        var m = it.parts.length, sp = 0.5;
+        for (var j = 0; j < m; j++) {
+          var st2 = (j / m) * sp;
+          var cp = easeOut(clamp((p - st2) / (1 - sp), 0, 1));
+          var cs = it.parts[j].style;
+          cs.opacity = cp;
+          cs.transform = 'translate3d(0,' + ((1 - cp) * 34).toFixed(2) + 'px,0)';
+        }
+        break;
+      }
+    }
+
+    // data-fx-pin: al salir por arriba, el bloque se aleja y se apaga en vez
+    // de desaparecer de golpe. Es el gesto que hace que el hero no "corte".
+    if (it.pin && r.top < 0) {
+      var out = clamp(-r.top / (vh * 0.9), 0, 1);
+      s.opacity = String(1 - out);
+      s.transform = 'translate3d(0,' + (out * -60).toFixed(1) + 'px,0) scale(' + (1 - out * 0.06).toFixed(4) + ')';
+      s.filter = out > 0.02 ? 'blur(' + (out * 7).toFixed(2) + 'px)' : '';
+    }
+  }
+
+  // Cintas: en vez de girar solas a velocidad fija, las mueve el scroll (y la
+  // inercia). Es un detalle pequeño que se nota muchísimo. Van en su propio
+  // bucle continuo (son 1-2 elementos) para no obligar al resto del motor a
+  // redibujar 30 veces por segundo sin motivo.
+  var tracks = [];
+  function tick() {
+    for (var i = 0; i < tracks.length; i++) {
+      var t = tracks[i];
+      t.off += t.dir * 0.4 + vel * t.dir * 0.35;
+      var w = t.el.scrollWidth / 2;
+      if (w > 0) { if (t.off > w) t.off -= w; if (t.off < -w) t.off += w; }
+      t.el.style.transform = 'translate3d(' + (-t.off).toFixed(2) + 'px,0,0)';
+    }
+    vel *= 0.9;
+    if (tracks.length) requestAnimationFrame(tick);
+  }
+
+  // El rótulo del borde es el de la última sección cuyo inicio ya has pasado.
+  function railFor(vh) {
+    var mid = vh * 0.45, txt = '';
+    for (var i = 0; i < rails.length; i++) {
+      if (rails[i].getBoundingClientRect().top <= mid) txt = rails[i].dataset.rail;
+    }
+    if (txt === railNow || !railL) return;
+    railNow = txt;
+    [railL, railR].forEach(function (rail) {
+      var sp = rail.firstChild;
+      sp.classList.add('out');
+      setTimeout(function () { sp.textContent = txt; sp.classList.remove('out'); }, 260);
+    });
+  }
+
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var vh = innerHeight;
+    var y = scrollY;
+    vel += ((y - lastY) - vel) * 0.25;
+    lastY = y;
+    for (var i = 0; i < els.length; i++) apply(els[i], vh);
+    railFor(vh);
+    if (bar) {
+      var max = document.documentElement.scrollHeight - vh;
+      bar.style.transform = 'scaleX(' + (max > 0 ? clamp(y / max, 0, 1) : 0).toFixed(4) + ')';
+    }
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+
+  function init() {
+    root.classList.add('fx-on');
+    bar = document.createElement('div'); bar.className = 'fx-progress'; document.body.appendChild(bar);
+    railL = document.createElement('div'); railL.className = 'fx-rail l'; railL.appendChild(document.createElement('span'));
+    railR = document.createElement('div'); railR.className = 'fx-rail r'; railR.appendChild(document.createElement('span'));
+    document.body.appendChild(railL); document.body.appendChild(railR);
+    register();
+    tracks = [].slice.call(document.querySelectorAll('[data-fx-marquee]')).map(function (el, i) {
+      el.style.animation = 'none';
+      return { el: el, off: 0, dir: i % 2 ? -1 : 1 };
+    });
+    addEventListener('scroll', request, { passive: true });
+    addEventListener('resize', function () { register(); request(); }, { passive: true });
+    // Las imágenes cambian la altura de los bloques al cargar: recalcula.
+    addEventListener('load', function () { register(); request(); });
+    if (tracks.length) requestAnimationFrame(tick);
+    request();
+  }
+  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 </body>
 </html>
