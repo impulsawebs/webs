@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clínica dental Arce y Sheligo — Odontología general y estética dental en Santander</title>
+<meta name="description" content="Clínica dental Arce y Sheligo: Odontología general y estética dental en Santander. Pide tu cita." />
+<link href="../fonts/pair-0.css" rel="stylesheet" />
+<style>
+  /* ===========================================================
+     ARQUETIPO G — "IVORY"
+     El de gama alta, para enseñar como referencia. Hero partido:
+     tipografía a la izquierda sobre negro, pieza a sangre a la
+     derecha. Paleta corta — noche, crema y oro — y todo lo demás
+     minúsculo y muy espaciado.
+     Referencia: referencias/ivory/portada.jpg (@docmo.agency).
+     =========================================================== */
+  :root {
+    --noche: #0A0A0B;
+    --noche-2: #121214;
+    --crema: #F4EFE6;
+    --oro: #C9A227;
+    --oro-claro: #E8CE84;
+    --tenue: rgba(244,239,230,.56);
+    --filete: rgba(244,239,230,.14);
+    --marca: #E11D48;
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Instrument Sans', system-ui, sans-serif;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--noche); color:var(--crema);
+    font-family:var(--font-body); line-height:1.6; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden; }
+  h1,h2,h3 { margin:0; font-weight:400; font-family:var(--font-display); letter-spacing:-.02em; }
+  p { margin:0; color:var(--tenue); }
+  a { color:inherit; }
+  .container { max-width:1240px; margin:0 auto; padding:0 2.2rem; position:relative; z-index:2; }
+
+  .eyebrow, .mono { font-family:var(--mono); font-size:.6rem; font-weight:500;
+    letter-spacing:.26em; text-transform:uppercase; color:var(--tenue); }
+  .eyebrow { display:inline-flex; align-items:center; gap:.7rem; }
+  .eyebrow::before { content:''; width:20px; height:1px; background:var(--oro); }
+
+  /* Botón crema en píldora: el CTA de la referencia. */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+    font-family:var(--mono); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
+    background:var(--oro-claro); color:#17140C; padding:1rem 1.9rem; border-radius:999px;
+    text-decoration:none; border:1px solid var(--oro-claro); cursor:pointer;
+    transition:background .45s cubic-bezier(.2,.8,.2,1), color .45s, border-color .45s, transform .45s; }
+  .btn:hover { background:transparent; color:var(--oro-claro); transform:translateY(-2px); }
+  .btn-texto { font-family:var(--mono); font-size:.62rem; letter-spacing:.2em;
+    text-transform:uppercase; text-decoration:none; color:var(--tenue);
+    border-bottom:1px solid var(--filete); padding-bottom:3px; transition:color .35s, border-color .35s; }
+  .btn-texto:hover { color:var(--crema); border-color:var(--oro); }
+  .btn-filete { display:inline-flex; align-items:center; font-family:var(--mono);
+    font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; text-decoration:none;
+    border:1px solid var(--oro); color:var(--oro-claro); padding:.65rem 1.2rem;
+    transition:background .4s, color .4s; }
+  .btn-filete:hover { background:var(--oro); color:#17140C; }
+
+  /* ===== Nav ===== */
+  header.nav { position:fixed; top:0; left:0; right:0; z-index:80;
+    transition:background .45s, border-color .45s; border-bottom:1px solid transparent; }
+  header.nav.scrolled { background:rgba(10,10,11,.82); backdrop-filter:blur(18px);
+    border-color:var(--filete); }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between;
+    padding:1.5rem 2.2rem; }
+  .logo { font-family:var(--mono); font-size:.72rem; letter-spacing:.42em;
+    text-transform:uppercase; text-decoration:none; }
+  nav.links { display:flex; gap:2.4rem; }
+  nav.links a { font-family:var(--mono); font-size:.58rem; letter-spacing:.22em;
+    text-transform:uppercase; text-decoration:none; color:var(--tenue); transition:color .3s; }
+  nav.links a:hover { color:var(--crema); }
+  .burger { display:none; background:none; border:1px solid var(--filete); cursor:pointer;
+    padding:.6rem .7rem; }
+  .burger span { display:block; width:17px; height:1px; background:var(--crema); margin:4px 0; }
+  .mobile-menu { display:none; flex-direction:column; max-height:0; overflow:hidden; opacity:0;
+    background:var(--noche-2); border-top:1px solid var(--filete);
+    transition:max-height .45s, opacity .35s; }
+  .mobile-menu a { text-decoration:none; padding:1rem 2.2rem; border-bottom:1px solid var(--filete);
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; }
+  .mobile-menu.open { max-height:340px; opacity:1; }
+
+  /* ===== HERO partido ===== */
+  .hero { min-height:100vh; padding:0; display:grid; grid-template-columns:1fr 1fr; align-items:stretch; }
+  .hero-texto { display:flex; flex-direction:column; justify-content:center;
+    padding:8rem 4.4rem 5rem; position:relative; z-index:2; }
+  .hero h1 { font-size:clamp(2.6rem, 4.6vw, 4.6rem); line-height:1.03; }
+  /* El remate en itálica dorada es la firma del arquetipo. */
+  .hero h1 .remate { display:block; font-style:italic; color:var(--oro-claro); }
+  .hero .lead { margin-top:1.8rem; max-width:34ch; font-size:1rem; }
+  .hero-cta { display:flex; align-items:center; gap:1.8rem; margin-top:2.6rem; flex-wrap:wrap; }
+  .hero-datos { margin-top:auto; padding-top:3.4rem; display:flex; gap:2.4rem; flex-wrap:wrap; }
+  .hero-datos span { font-family:var(--mono); font-size:.55rem; letter-spacing:.22em;
+    text-transform:uppercase; color:rgba(244,239,230,.4); }
+  .hero-datos b { display:block; margin-top:.4rem; font-family:var(--font-display);
+    font-size:1rem; font-weight:400; letter-spacing:0; text-transform:none; color:var(--crema); }
+
+  /* La pieza: si hay render, va de fondo; si no, el lienzo de galería. */
+  .hero-pieza { position:relative; overflow:hidden; border-left:1px solid var(--filete); }
+  .hero-pieza img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .pieza-lienzo { position:absolute; inset:0;
+    background:
+      radial-gradient(120% 90% at 68% 34%, rgba(201,162,39,.30), transparent 62%),
+      radial-gradient(90% 70% at 30% 78%, rgba(120,84,30,.26), transparent 66%),
+      linear-gradient(168deg, #1A1611 0%, #0C0B0A 62%, #080706 100%); }
+  .pieza-glifo { position:absolute; left:50%; top:46%; translate:-50% -50%;
+    width:58%; max-width:400px; }
+  .pieza-glifo svg { width:100%; height:auto; fill:none; stroke:var(--oro-claro);
+    stroke-width:.34; stroke-linecap:round; stroke-linejoin:round;
+    filter:drop-shadow(0 0 40px rgba(232,206,132,.45)); }
+  /* Pedestal: una losa con su sombra, para que la pieza no flote en el vacío. */
+  /* Foco de galería: halo cálido detrás de la pieza y sombra de apoyo. Un
+     pedestal dibujado a mano quedaba como un ladrillo flotando. */
+  .pieza-foco { position:absolute; left:50%; top:44%; translate:-50% -50%;
+    width:74%; aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle at 50% 45%, rgba(232,206,132,.20), rgba(201,162,39,.07) 42%, transparent 68%);
+    filter:blur(18px); }
+  .pieza-sombra { position:absolute; left:50%; bottom:17%; translate:-50% 0;
+    width:38%; height:5%; border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,.72), transparent 72%);
+    filter:blur(10px); }
+  .pieza-grano { position:absolute; inset:0; opacity:.22; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); }
+
+  .scroll-cue { position:absolute; left:50%; bottom:2.2rem; translate:-50% 0; z-index:5;
+    display:flex; flex-direction:column; align-items:center; gap:.8rem;
+    font-family:var(--mono); font-size:.52rem; letter-spacing:.3em; text-transform:uppercase;
+    color:rgba(244,239,230,.45); }
+  .scroll-cue .track { width:1px; height:40px; background:var(--filete);
+    position:relative; overflow:hidden; }
+  .scroll-cue .track::after { content:''; position:absolute; inset:0; background:var(--oro);
+    transform:translateY(-100%); animation:cue 2.4s ease-in-out infinite; }
+  @keyframes cue { 50% { transform:translateY(0); } 100% { transform:translateY(100%); } }
+
+  /* ===== Secciones ===== */
+  section { padding:8rem 0; position:relative; }
+  .section-head { max-width:56ch; margin-bottom:4rem; }
+  .section-head.center { margin-left:auto; margin-right:auto; text-align:center; }
+  .section-head.center .eyebrow { justify-content:center; }
+  .section-head h2 { margin-top:1.5rem; font-size:clamp(2rem,4vw,3.4rem); line-height:1.08; }
+  .section-head p { margin-top:1.3rem; }
+
+  .ticker-band { border-top:1px solid var(--filete); border-bottom:1px solid var(--filete);
+    background:var(--noche-2); }
+  .ticker { display:grid; grid-template-columns:repeat(3,1fr); }
+  .ticker > div { padding:3.4rem 2.2rem 3.4rem 0; border-right:1px solid var(--filete); }
+  .ticker > div:last-child { border-right:0; }
+  .ticker-num { font-family:var(--font-display); font-size:clamp(1.3rem,2.2vw,1.8rem); }
+  .ticker-label { margin-top:.8rem; font-size:.92rem; color:var(--tenue); max-width:30ch; }
+
+  .svc-list { border-top:1px solid var(--filete); }
+  .svc-row { display:grid; grid-template-columns:4.5rem 3rem 1fr 2.5rem; gap:1.8rem;
+    align-items:start; padding:2.6rem 0; border-bottom:1px solid var(--filete);
+    transition:padding-left .55s cubic-bezier(.2,.8,.2,1); }
+  .svc-row:hover { padding-left:1.4rem; }
+  .svc-idx { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em;
+    color:var(--oro); padding-top:.5rem; }
+  .svc-ic svg { width:26px; height:26px; stroke:var(--oro-claro); fill:none; stroke-width:1; }
+  .svc-body h3 { font-family:var(--font-display); font-size:clamp(1.3rem,2.2vw,1.8rem);
+    display:flex; align-items:baseline; gap:1rem; flex-wrap:wrap; }
+  .svc-body p { margin-top:.7rem; max-width:52ch; font-size:.96rem; }
+  .svc-tag { font-family:var(--mono); font-size:.52rem; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--oro); border:1px solid var(--oro);
+    padding:.3rem .7rem; white-space:nowrap; }
+  .svc-arrow { justify-self:end; padding-top:.5rem; }
+  .svc-arrow svg { width:20px; height:20px; stroke:var(--tenue); fill:none;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), stroke .4s; }
+  .svc-row:hover .svc-arrow svg { transform:translateX(9px); stroke:var(--oro-claro); }
+
+  .quote-section { background:var(--noche-2); }
+  .quote-wrap { display:block; max-width:none; text-align:center; }
+  .quote-mark { display:block; font-family:var(--font-display); font-size:3rem;
+    color:var(--oro); line-height:1; margin-bottom:1.6rem; }
+  blockquote { margin:0 auto; max-width:26ch; font-family:var(--font-display);
+    font-style:italic; font-size:clamp(1.6rem,3.6vw,2.8rem); line-height:1.22; }
+  .quote-source { margin-top:2.2rem; font-family:var(--mono); font-size:.58rem;
+    letter-spacing:.24em; text-transform:uppercase; color:var(--tenue); }
+
+  .quote-trio, .proceso-grid { display:grid; grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--filete); border-left:1px solid var(--filete); }
+  .qcard, .step { border-right:1px solid var(--filete); border-bottom:1px solid var(--filete);
+    padding:2.8rem 2.2rem; display:flex; flex-direction:column; gap:1rem;
+    transition:background .5s ease; }
+  .qcard:hover, .step:hover { background:var(--noche-2); }
+  .qcard p { font-family:var(--font-display); font-size:1.15rem; line-height:1.35; color:var(--crema); }
+  .qcard .who, .step h3 { font-family:var(--mono); font-size:.55rem; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--oro); }
+  .qcard .who { margin-top:auto; }
+  .step-n { font-family:var(--font-display); font-size:2.2rem; color:var(--oro-claro); }
+  .step h3 { margin:.5rem 0 .3rem; }
+  .step p { font-size:.94rem; }
+
+  .marquee { overflow:hidden; border-top:1px solid var(--filete);
+    border-bottom:1px solid var(--filete); padding:1.7rem 0; }
+  .marquee-track { display:flex; width:max-content; }
+  .marquee-chunk { display:flex; align-items:center; }
+  .marquee .item { font-family:var(--font-display); font-size:clamp(1.4rem,2.8vw,2.2rem);
+    padding:0 1.5rem; white-space:nowrap; color:var(--tenue); }
+  .marquee .sep { color:var(--oro); font-size:.6rem; }
+
+  .finale { text-align:center; }
+  .finale h2 { font-size:clamp(2.2rem,6vw,4.6rem); line-height:1.02; }
+  .tel-giant { display:inline-block; margin-top:2rem; font-family:var(--font-display);
+    font-size:clamp(1.9rem,5vw,3.6rem); text-decoration:none; color:var(--oro-claro);
+    transition:color .45s; }
+  .tel-giant:hover { color:var(--crema); }
+  .finale-meta { margin-top:1.8rem; display:flex; gap:1rem; justify-content:center;
+    flex-wrap:wrap; font-family:var(--mono); font-size:.55rem; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--tenue); }
+  .finale-meta .sep { color:var(--oro); }
+  .finale-chip { display:inline-flex; align-items:center; gap:.6rem; margin-top:2.2rem;
+    font-family:var(--mono); font-size:.55rem; letter-spacing:.2em; text-transform:uppercase;
+    border:1px solid var(--filete); padding:.7rem 1.3rem; color:var(--tenue); }
+  .finale-chip .dot { width:5px; height:5px; border-radius:50%; background:var(--oro); }
+
+  footer { border-top:1px solid var(--filete); padding:2.8rem 0; }
+  .footer-inner { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    font-family:var(--mono); font-size:.55rem; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(244,239,230,.4); }
+
+  @media (max-width:1000px) {
+    .hero { grid-template-columns:1fr; min-height:auto; }
+    .hero-texto { padding:2.6rem 2.2rem 3.5rem; order:2; }
+    .hero-pieza { order:1; height:40vh; border-left:0; border-bottom:1px solid var(--filete); }
+    .ticker, .quote-trio, .proceso-grid { grid-template-columns:1fr; }
+    .ticker > div { border-right:0; border-bottom:1px solid var(--filete); padding-right:0; }
+  }
+  @media (max-width:768px) {
+    .container { padding:0 1.4rem; }
+    .nav-inner { padding:1.1rem 1.4rem; }
+    nav.links, .nav-actions .btn-filete { display:none; }
+    .burger, .mobile-menu { display:flex; }
+    .svc-row { grid-template-columns:3.2rem 1fr; gap:1rem; }
+    .svc-ic, .svc-arrow { display:none; }
+    section { padding:5rem 0; }
+    .scroll-cue { display:none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .marquee-track, .scroll-cue .track::after { animation:none; } }
+</style>
+<meta name="theme-color" content="#E11D48" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23E11D48%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2238%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EA%3C%2Ftext%3E%3C%2Fsvg%3E" />
+<link rel="canonical" href="https://impulsawebs.github.io/webs/p/sheligo.html" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:title" content="Clínica dental Arce y Sheligo — Odontología general y estética dental en Santander" />
+<meta property="og:description" content="Clínica dental Arce y Sheligo: Odontología general y estética dental en Santander. Pide tu cita — trato cercano y presupuesto claro." />
+<meta property="og:url" content="https://impulsawebs.github.io/webs/p/sheligo.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dentist","name":"Clínica dental Arce y Sheligo","description":"Clínica dental Arce y Sheligo: Odontología general y estética dental en Santander. Pide tu cita — trato cercano y presupuesto claro.","telephone":"+34 942 94 48 87","url":"https://impulsawebs.github.io/webs/p/sheligo.html","areaServed":"Santander","address":{"@type":"PostalAddress","addressLocality":"Santander","addressCountry":"ES"}}</script>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="logo" href="#top">Arce y Sheligo</a>
+    <nav class="links">
+      <a href="#servicios">Tratamientos</a>
+      <a href="#nosotros">La clínica</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn-filete" href="#contacto">Pedir cita</a>
+      <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#servicios">Tratamientos</a>
+    <a href="#nosotros">La clínica</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" data-rail="Odontología general y estética dental">
+    <div class="hero-texto">
+      <div class="hero-inner" data-fx="fade" data-fx-pin>
+        <span class="eyebrow">Arce y Sheligo · Santander</span>
+        <h1 data-fx="words">Cuidado dental,<span class="remate">sin prisas.</span></h1>
+        <p class="lead">Odontología cercana en Santander. Te explicamos cada paso y te damos un presupuesto claro desde el principio.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contacto">Pide tu cita gratuita</a>
+          <a class="btn-texto" href="tel:+34942944887">Llamar ahora</a>
+        </div>
+        <!-- Solo datos verificables. -->
+        <div class="hero-datos">
+          <span>Dónde<b>Santander</b></span>
+          <span>Teléfono<b>+34 942 94 48 87</b></span>
+          <span>Primera visita<b>Sin compromiso</b></span>
+        </div>
+      </div>
+    </div>
+    <!-- La pieza. Cuando exista el render, se sustituye .pieza-lienzo por
+         <img src="imagenes/sheligo.jpg" alt="">. Ver video-ia/DIENTE-IMAGEN.md -->
+    <div class="hero-pieza">
+      <div class="pieza-lienzo" aria-hidden="true"></div>
+      <div class="pieza-foco" aria-hidden="true"></div>
+      <div class="pieza-sombra" aria-hidden="true"></div>
+      <div class="pieza-glifo" data-fx="drift" data-fx-speed="34" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2c-1.7-1.2-4.8-1.6-6.2.9-1.5 2.5-.3 5.2.5 7.5.8 2.4 1.1 5.4 1.9 7.4.4 1 1.8 1 2.1-.1.4-1.5.6-3.5 1.7-3.5s1.3 2 1.7 3.5c.3 1.1 1.7 1.1 2.1.1.8-2 1.1-5 1.9-7.4.8-2.3 2-5 .5-7.5-1.4-2.5-4.5-2.1-6.2-.9z"/><path d="M9.4 7.4c-.8.3-1.4 1-1.6 1.9"/></svg></div>
+      <div class="pieza-grano" aria-hidden="true"></div>
+      <div class="scroll-cue" aria-hidden="true"><span class="track"></span>Scroll</div>
+    </div>
+  </section>
+
+  <div class="content">
+  <div class="ticker-band" data-rail="Primera visita sin compromiso">
+    <div class="container ticker" data-fx="stagger">
+      <div><div class="ticker-num">Sin compromiso</div><div class="ticker-label">Primera visita para valorarte y explicarte, sin presión.</div></div>
+      <div><div class="ticker-num">Precio cerrado</div><div class="ticker-label">Presupuesto por escrito antes de empezar. Sin sorpresas.</div></div>
+      <div><div class="ticker-num">Trato cercano</div><div class="ticker-label">Te lo contamos claro, sin tecnicismos.</div></div>
+    </div>
+  </div>
+
+  <section id="servicios" data-rail="Qué podemos hacer por ti">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;">Servicios</span>
+        <h2 data-fx="words">Qué podemos hacer por ti</h2>
+        <p data-fx="rise">Soluciones claras para cada caso, explicadas sin tecnicismos y con presupuesto cerrado.</p>
+      </div>
+      <div class="svc-list" data-fx="stagger">
+        <div class="svc-row glow-card">
+          <span class="svc-idx">01</span>
+          <span class="svc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2c-1.7-1.2-4.8-1.6-6.2.9-1.5 2.5-.3 5.2.5 7.5.8 2.4 1.1 5.4 1.9 7.4.4 1 1.8 1 2.1-.1.4-1.5.6-3.5 1.7-3.5s1.3 2 1.7 3.5c.3 1.1 1.7 1.1 2.1.1.8-2 1.1-5 1.9-7.4.8-2.3 2-5 .5-7.5-1.4-2.5-4.5-2.1-6.2-.9z"/><path d="M9.4 7.4c-.8.3-1.4 1-1.6 1.9"/></svg></span>
+          <div class="svc-body"><h3>Revisión y limpieza dental<span class="svc-tag">El más solicitado</span></h3><p>Prevención de verdad: detectamos a tiempo para que no vaya a más.</p></div>
+          <span class="svc-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 5.5L20 12l-6.5 6.5"/></svg></span>
+        </div>
+        <div class="svc-row glow-card">
+          <span class="svc-idx">02</span>
+          <span class="svc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5c0 6.2 3.6 9.5 8 9.5s8-3.3 8-9.5"/><path d="M4 8.5c2.7 1.7 13.3 1.7 16 0"/><path d="M8 12.9v1.4M12 13.9v1.4M16 12.9v1.4"/></svg></span>
+          <div class="svc-body"><h3>Ortodoncia invisible</h3><p>Ortodoncia discreta con simulación 3D del resultado antes de empezar.</p></div>
+          <span class="svc-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 5.5L20 12l-6.5 6.5"/></svg></span>
+        </div>
+        <div class="svc-row glow-card">
+          <span class="svc-idx">03</span>
+          <span class="svc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3.5h6l-.6 3H9.6z"/><path d="M9.8 6.5h4.4l-.5 11.5a1.7 1.7 0 0 1-3.4 0z"/><path d="M9.9 9.5h4.2M10.1 12.5h3.8M10.3 15.5h3.4"/></svg></span>
+          <div class="svc-body"><h3>Implantes dentales</h3><p>Recupera tu sonrisa con implantes de titanio y planificación 3D guiada.</p></div>
+          <span class="svc-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 5.5L20 12l-6.5 6.5"/></svg></span>
+        </div>
+        <div class="svc-row glow-card">
+          <span class="svc-idx">04</span>
+          <span class="svc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5l1.6 4.4L17 11l-4.4 1.6L11 17l-1.6-4.4L5 11l4.4-1.6z"/><path d="M18 4.5v3M16.5 6h3M19 16.5v2.4M17.8 17.7h2.4"/></svg></span>
+          <div class="svc-body"><h3>Estética dental y blanqueamiento</h3><p>Carillas, blanqueamiento y diseño de sonrisa con un resultado natural.</p></div>
+          <span class="svc-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 5.5L20 12l-6.5 6.5"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros" data-rail="Por qué elegirnos">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow" data-fx="rise" style="margin-bottom:.9rem;justify-content:center;">Nuestro compromiso</span>
+        <h2 data-fx="words">Por qué elegirnos</h2>
+      </div>
+      <div class="quote-trio" data-fx="stagger">
+        <div class="qcard">
+          <p>Presupuesto cerrado y por escrito antes de empezar.</p>
+          <div class="who">Sin sorpresas</div>
+        </div>
+        <div class="qcard">
+          <p>Buscamos hueco cuanto antes; urgencias el mismo día siempre que se pueda.</p>
+          <div class="who">Cita rápida</div>
+        </div>
+        <div class="qcard">
+          <p>Entiendes qué necesitas y por qué, sin tecnicismos.</p>
+          <div class="who">Claridad</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" data-fx-marquee><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">Santander</span><span class="sep">●</span></span><span class="marquee-chunk"><span class="item">Revisión y limpieza dental</span><span class="sep">●</span><span class="item">Ortodoncia invisible</span><span class="sep">●</span><span class="item">Implantes dentales</span><span class="sep">●</span><span class="item">Estética dental y blanqueamiento</span><span class="sep">●</span><span class="item">Santander</span><span class="sep">●</span></span></div>
+  </div>
+
+  <section id="contacto" class="finale" data-rail="+34 942 94 48 87">
+    <div class="container">
+      <span class="eyebrow" data-fx="rise" style="margin-bottom:1.4rem; justify-content:center;">Contacto</span>
+      <h2 data-fx="words">Da el primer paso</h2>
+      <div><a class="tel-giant" data-fx="chars" href="tel:+34942944887">+34 942 94 48 87</a></div>
+      <div class="finale-meta" data-fx="rise">
+        <span>Clínica dental Arce y Sheligo</span><span class="sep">●</span>
+        <span>Santander</span><span class="sep">●</span>
+        <span>Pide tu cita sin compromiso</span>
+      </div>
+      <div data-fx="scale"><span class="finale-chip"><span class="dot"></span>Reserva tu primera visita sin coste y sin compromiso</span></div>
+    </div>
+  </section>
+
+    <footer>
+      <div class="container footer-inner">
+        <span>© 2026 Clínica dental Arce y Sheligo</span>
+        <span>Odontología general y estética dental · Santander · +34 942 94 48 87</span>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<script>
+  var nav = document.getElementById('siteNav');
+  addEventListener('scroll', function () { nav.classList.toggle('scrolled', scrollY > 60); }, { passive:true });
+  var b = document.getElementById('burger'), mm = document.getElementById('mobileMenu');
+  if (b && mm) b.addEventListener('click', function () { mm.classList.toggle('open'); });
+</script>
+
+<style>
+  .float-cta{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;flex-direction:column;gap:12px;}
+  .float-cta a{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform .18s;}
+  .float-cta a:hover{transform:scale(1.08);}
+  .float-cta .wa{background:#25D366;}
+  .float-cta .call{background:#E11D48;}
+  .float-cta svg{width:28px;height:28px;fill:#fff;}
+  @media(min-width:820px){.float-cta a{width:60px;height:60px;}}
+</style>
+<div class="float-cta">
+  <a class="wa" href="https://wa.me/34942944887?text=Hola%2C%20he%20visto%20vuestra%20web%20y%20quiero%20pedir%20cita." target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-.999zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.767.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+  <a class="call" href="tel:+34942944887" aria-label="Llamar">
+    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.18z"/></svg>
+  </a>
+</div>
+
+<style id="fx-css">
+  /* Barra de progreso: referencia constante de dónde estás en la página. */
+  .fx-progress { position:fixed; top:0; left:0; height:2px; width:100%; z-index:80;
+    transform:scaleX(0); transform-origin:0 50%; background:var(--brand, currentColor);
+    pointer-events:none; will-change:transform; }
+  /* Rótulos verticales en los bordes. Cambian de texto según la sección que
+     estés mirando: dan continuidad y sensación de "sitio con criterio". */
+  .fx-rail { position:fixed; top:0; bottom:0; width:2.6rem; z-index:40; pointer-events:none;
+    display:none; align-items:center; justify-content:center; overflow:hidden; }
+  .fx-rail.l { left:0; } .fx-rail.r { right:0; }
+  .fx-rail span { display:block; white-space:nowrap; font-size:.62rem; font-weight:700;
+    letter-spacing:.34em; text-transform:uppercase; opacity:.4;
+    transition:opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .fx-rail.l span { transform:rotate(180deg); writing-mode:vertical-rl; }
+  .fx-rail.r span { writing-mode:vertical-rl; }
+  .fx-rail span.out { opacity:0; }
+  @media (min-width:1100px) { .fx-rail { display:flex; } }
+  /* Las palabras/letras partidas no deben romper el texto ni el copiar-pegar. */
+  .fx-w { display:inline-block; white-space:nowrap; }
+  .fx-c { display:inline-block; }
+  html.fx-on [data-fx] { will-change:transform, opacity; }
+  @media (prefers-reduced-motion: reduce) { .fx-progress, .fx-rail { display:none; } }
+</style>
+<script>
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var root = document.documentElement;
+  var els = [], rails = [], bar = null, railL = null, railR = null;
+  var lastY = scrollY, vel = 0, railNow = '';
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  // Suavizado: el movimiento no debe ser lineal o parece una hoja de cálculo.
+  function ease(p) { return p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3)/2; }
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+
+  // Parte el texto en palabras (y opcionalmente letras) SIN romper palabras a
+  // mitad: cada palabra es un inline-block nowrap.
+  function split(el, chars) {
+    if (el.dataset.fxSplit) return;
+    el.dataset.fxSplit = '1';
+    var walk = function (node) {
+      [].slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (tok) {
+            if (!tok) return;
+            if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span'); w.className = 'fx-w';
+            if (chars) {
+              [].slice.call(tok).forEach(function (c) {
+                var s = document.createElement('span'); s.className = 'fx-c'; s.textContent = c;
+                w.appendChild(s);
+              });
+            } else { w.textContent = tok; }
+            frag.appendChild(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains('fx-w')) walk(n);
+      });
+    };
+    walk(el);
+  }
+
+  function register() {
+    els = [];
+    [].slice.call(document.querySelectorAll('[data-fx]')).forEach(function (el) {
+      var kind = el.dataset.fx;
+      var item = { el: el, kind: kind, speed: parseFloat(el.dataset.fxSpeed || '0') || 0,
+                   from: el.dataset.fxFrom || 'up', parts: null, pin: 'fxPin' in el.dataset };
+      if (kind === 'words' || kind === 'chars') {
+        split(el, kind === 'chars');
+        item.parts = [].slice.call(el.querySelectorAll(kind === 'chars' ? '.fx-c' : '.fx-w'));
+      } else if (kind === 'stagger') {
+        item.parts = [].slice.call(el.children);
+      }
+      els.push(item);
+    });
+    rails = [].slice.call(document.querySelectorAll('[data-rail]'));
+  }
+
+  function apply(it, vh) {
+    var el = it.el, r = el.getBoundingClientRect();
+    // Fuera de la ventana con margen: no gastes fotogramas en ello.
+    if (r.bottom < -vh * 0.6 || r.top > vh * 1.6) return;
+
+    // p = progreso de ENTRADA (0 cuando el borde superior toca abajo del todo,
+    // 1 cuando ha subido un tercio de pantalla). q = progreso de TRAVESÍA
+    // completa por la ventana, para parallax.
+    var p = clamp((vh - r.top) / (vh * 0.62), 0, 1);
+    var q = clamp((vh - r.top) / (vh + r.height), 0, 1);
+    var e = easeOut(p), s = el.style;
+
+    switch (it.kind) {
+      case 'rise':
+        s.opacity = e;
+        s.transform = 'translate3d(0,' + ((1 - e) * 46).toFixed(2) + 'px,0)';
+        break;
+      case 'fade':
+        s.opacity = e;
+        break;
+      case 'scale':
+        s.opacity = e;
+        s.transform = 'scale(' + (0.93 + e * 0.07).toFixed(4) + ')';
+        break;
+      case 'clip':
+        s.opacity = e < 0.05 ? 0 : 1;
+        s.clipPath = it.from === 'left'
+          ? 'inset(0 ' + ((1 - e) * 100).toFixed(2) + '% 0 0)'
+          : 'inset(' + ((1 - e) * 105).toFixed(2) + '% 0 0 0)';
+        break;
+      case 'line':
+        s.transform = 'scaleX(' + e.toFixed(4) + ')';
+        s.transformOrigin = '0 50%';
+        break;
+      case 'parallax':
+        s.transform = 'translate3d(0,' + ((0.5 - q) * (it.speed || 90)).toFixed(2) + 'px,0)';
+        break;
+      case 'drift':
+        // Deriva lateral + giro suave: da vida a los objetos grandes.
+        s.transform = 'translate3d(' + ((0.5 - q) * (it.speed || 60)).toFixed(2) + 'px,'
+          + ((0.5 - q) * (it.speed || 60) * 0.5).toFixed(2) + 'px,0) rotate('
+          + ((q - 0.5) * 8).toFixed(2) + 'deg)';
+        break;
+      case 'words':
+      case 'chars': {
+        // Cada palabra/letra tiene su propia ventana dentro del progreso del
+        // bloque: el titular se "escribe" conforme bajas, y se deshace al subir.
+        var n = it.parts.length, spread = 0.55;
+        for (var i = 0; i < n; i++) {
+          var st = (i / n) * spread;
+          var wp = easeOut(clamp((p - st) / (1 - spread), 0, 1));
+          var ps = it.parts[i].style;
+          ps.opacity = wp;
+          ps.transform = 'translate3d(0,' + ((1 - wp) * 0.85).toFixed(3) + 'em,0)';
+        }
+        break;
+      }
+      case 'stagger': {
+        var m = it.parts.length, sp = 0.5;
+        for (var j = 0; j < m; j++) {
+          var st2 = (j / m) * sp;
+          var cp = easeOut(clamp((p - st2) / (1 - sp), 0, 1));
+          var cs = it.parts[j].style;
+          cs.opacity = cp;
+          cs.transform = 'translate3d(0,' + ((1 - cp) * 34).toFixed(2) + 'px,0)';
+        }
+        break;
+      }
+    }
+
+    // data-fx-pin: al salir por arriba, el bloque se aleja y se apaga en vez
+    // de desaparecer de golpe. Es el gesto que hace que el hero no "corte".
+    if (it.pin && r.top < 0) {
+      var out = clamp(-r.top / (vh * 0.9), 0, 1);
+      s.opacity = String(1 - out);
+      s.transform = 'translate3d(0,' + (out * -60).toFixed(1) + 'px,0) scale(' + (1 - out * 0.06).toFixed(4) + ')';
+      s.filter = out > 0.02 ? 'blur(' + (out * 7).toFixed(2) + 'px)' : '';
+    }
+  }
+
+  // Cintas: en vez de girar solas a velocidad fija, las mueve el scroll (y la
+  // inercia). Es un detalle pequeño que se nota muchísimo. Van en su propio
+  // bucle continuo (son 1-2 elementos) para no obligar al resto del motor a
+  // redibujar 30 veces por segundo sin motivo.
+  var tracks = [];
+  function tick() {
+    for (var i = 0; i < tracks.length; i++) {
+      var t = tracks[i];
+      t.off += t.dir * 0.4 + vel * t.dir * 0.35;
+      var w = t.el.scrollWidth / 2;
+      if (w > 0) { if (t.off > w) t.off -= w; if (t.off < -w) t.off += w; }
+      t.el.style.transform = 'translate3d(' + (-t.off).toFixed(2) + 'px,0,0)';
+    }
+    vel *= 0.9;
+    if (tracks.length) requestAnimationFrame(tick);
+  }
+
+  // El rótulo del borde es el de la última sección cuyo inicio ya has pasado.
+  function railFor(vh) {
+    var mid = vh * 0.45, txt = '';
+    for (var i = 0; i < rails.length; i++) {
+      if (rails[i].getBoundingClientRect().top <= mid) txt = rails[i].dataset.rail;
+    }
+    if (txt === railNow || !railL) return;
+    railNow = txt;
+    [railL, railR].forEach(function (rail) {
+      var sp = rail.firstChild;
+      sp.classList.add('out');
+      setTimeout(function () { sp.textContent = txt; sp.classList.remove('out'); }, 260);
+    });
+  }
+
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var vh = innerHeight;
+    var y = scrollY;
+    vel += ((y - lastY) - vel) * 0.25;
+    lastY = y;
+    for (var i = 0; i < els.length; i++) apply(els[i], vh);
+    railFor(vh);
+    if (bar) {
+      var max = document.documentElement.scrollHeight - vh;
+      bar.style.transform = 'scaleX(' + (max > 0 ? clamp(y / max, 0, 1) : 0).toFixed(4) + ')';
+    }
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+
+  function init() {
+    root.classList.add('fx-on');
+    bar = document.createElement('div'); bar.className = 'fx-progress'; document.body.appendChild(bar);
+    railL = document.createElement('div'); railL.className = 'fx-rail l'; railL.appendChild(document.createElement('span'));
+    railR = document.createElement('div'); railR.className = 'fx-rail r'; railR.appendChild(document.createElement('span'));
+    document.body.appendChild(railL); document.body.appendChild(railR);
+    register();
+    tracks = [].slice.call(document.querySelectorAll('[data-fx-marquee]')).map(function (el, i) {
+      el.style.animation = 'none';
+      return { el: el, off: 0, dir: i % 2 ? -1 : 1 };
+    });
+    addEventListener('scroll', request, { passive: true });
+    addEventListener('resize', function () { register(); request(); }, { passive: true });
+    // Las imágenes cambian la altura de los bloques al cargar: recalcula.
+    addEventListener('load', function () { register(); request(); });
+    if (tracks.length) requestAnimationFrame(tick);
+    request();
+  }
+  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+</body>
+</html>
