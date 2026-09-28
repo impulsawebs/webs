@@ -512,6 +512,214 @@
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.18z"/></svg>
   </a>
 </div>
+<style>
+  .ag-btn{background:#0891B2;position:relative;}
+  .ag-btn::after{content:"";position:absolute;inset:0;border-radius:50%;
+    box-shadow:0 0 0 0 #0891B280;animation:ag-pulse 2.6s ease-out infinite;}
+  @keyframes ag-pulse{70%{box-shadow:0 0 0 14px transparent;}100%{box-shadow:0 0 0 0 transparent;}}
+  .ag-panel{position:fixed;right:16px;bottom:16px;z-index:2147483001;
+    width:min(384px,calc(100vw - 32px));height:min(580px,calc(100vh - 32px));
+    display:none;flex-direction:column;overflow:hidden;border-radius:20px;
+    background:#fff;color:#14181c;box-shadow:0 24px 70px rgba(0,0,0,.3);
+    font-family:var(--font-body,system-ui,sans-serif);
+    opacity:0;transform:translateY(14px) scale(.97);transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);}
+  .ag-panel.open{display:flex;}
+  .ag-panel.in{opacity:1;transform:none;}
+  .ag-head{background:#0891B2;color:#fff;padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem;flex:0 0 auto;}
+  .ag-head .dot{width:9px;height:9px;border-radius:50%;background:#4ade80;flex:0 0 auto;}
+  .ag-head .t{font-weight:700;font-size:.95rem;line-height:1.2;}
+  .ag-head .s{font-size:.72rem;opacity:.85;}
+  .ag-head button{margin-left:auto;background:transparent;border:0;color:#fff;cursor:pointer;
+    font-size:1.5rem;line-height:1;padding:.2rem .4rem;border-radius:8px;opacity:.85;}
+  .ag-head button:hover{opacity:1;background:rgba(255,255,255,.15);}
+  .ag-log{flex:1 1 auto;overflow-y:auto;padding:1.1rem;display:flex;flex-direction:column;gap:.7rem;
+    background:#f7f8f9;-webkit-overflow-scrolling:touch;}
+  .ag-msg{max-width:86%;padding:.7rem .9rem;border-radius:14px;font-size:.9rem;line-height:1.5;
+    white-space:pre-wrap;overflow-wrap:anywhere;}
+  .ag-msg.bot{background:#fff;border:1px solid #e6e9ec;border-bottom-left-radius:5px;align-self:flex-start;}
+  .ag-msg.me{background:#0891B2;color:#fff;border-bottom-right-radius:5px;align-self:flex-end;}
+  .ag-msg.err{background:#fff4f4;border:1px solid #f3d0d0;color:#8a2b2b;align-self:flex-start;font-size:.85rem;}
+  .ag-note{align-self:center;text-align:center;font-size:.72rem;color:#7b848c;line-height:1.45;max-width:92%;}
+  .ag-chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.1rem .6rem;background:#f7f8f9;flex:0 0 auto;}
+  .ag-chips button{font:inherit;font-size:.78rem;padding:.42rem .8rem;border-radius:999px;cursor:pointer;
+    border:1px solid #0891B255;background:#fff;color:#0891B2;}
+  .ag-chips button:hover{background:#0891B212;}
+  .ag-dots{display:flex;gap:4px;align-self:flex-start;padding:.85rem .9rem;background:#fff;
+    border:1px solid #e6e9ec;border-radius:14px;border-bottom-left-radius:5px;}
+  .ag-dots i{width:6px;height:6px;border-radius:50%;background:#b6bec5;animation:ag-b 1.2s infinite;}
+  .ag-dots i:nth-child(2){animation-delay:.15s}.ag-dots i:nth-child(3){animation-delay:.3s}
+  @keyframes ag-b{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+  .ag-foot{flex:0 0 auto;border-top:1px solid #e6e9ec;background:#fff;padding:.65rem .7rem .5rem;}
+  .ag-form{display:flex;gap:.5rem;align-items:flex-end;}
+  .ag-form input{flex:1 1 auto;font:inherit;font-size:.9rem;padding:.7rem .9rem;border-radius:999px;
+    border:1px solid #dfe3e7;background:#f7f8f9;color:inherit;min-width:0;}
+  .ag-form input:focus{outline:2px solid #0891B255;outline-offset:1px;background:#fff;}
+  .ag-form button{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;
+    background:#0891B2;display:grid;place-items:center;}
+  .ag-form button:disabled{opacity:.45;cursor:default;}
+  .ag-form button svg{width:18px;height:18px;fill:#fff;}
+  .ag-legal{margin:.5rem .2rem .1rem;font-size:.66rem;color:#98a1a9;line-height:1.4;text-align:center;}
+  .ag-legal a{color:#25D366;font-weight:600;text-decoration:none;}
+  @media (max-width:520px){.ag-panel{right:0;bottom:0;width:100vw;height:100dvh;border-radius:0;}}
+  @media (prefers-reduced-motion:reduce){.ag-btn::after,.ag-dots i{animation:none;}.ag-panel{transition:none;}}
+</style>
+<script>
+(function(){
+  var ENDPOINT="https://agente-impulsa.impulsawebs.workers.dev/chat", SLUG="podoestetic", WA="34958048041", TEL="+34958048041";
+  var NOMBRE="Podoestétic";
+  var MAX_MIOS=8;          // tope de turnos también aquí, no solo en el servidor
+  var TIMEOUT=25000;
+
+  var HOLA='Hola. Soy el asistente de '+NOMBRE+'. Puedo contarle en qué le podemos ayudar y '+
+           'pasarle a pedir cita. Para cualquier cosa clínica, mejor se lo ve el profesional.';
+  var SUGE=['¿Qué tratamientos hacéis?','Quiero pedir cita','¿Dónde estáis?'];
+
+  var pila=document.querySelector('.float-cta');
+  if(!pila) return;
+
+  // --- Botón, dentro de la columna que ya existe (WhatsApp / llamar).
+  var btn=document.createElement('button');
+  btn.className='ag-btn'; btn.type='button';
+  btn.setAttribute('aria-label','Hablar con el asistente');
+  btn.style.cssText='width:56px;height:56px;border-radius:50%;border:0;cursor:pointer;'+
+    'display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.28);';
+  btn.innerHTML='<svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:#fff;position:relative;z-index:1">'+
+    '<path d="M12 3C7.03 3 3 6.58 3 11c0 2.2 1.02 4.18 2.66 5.6L5 21l4.2-2.1c.9.23 1.83.35 2.8.35 4.97 0 9-3.58 9-8s-4.03-8-9-8zm-3.5 9a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4zm3.5 0a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4zm3.5 0a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4z"/></svg>';
+  pila.insertBefore(btn,pila.firstChild);
+
+  // --- Panel
+  var p=document.createElement('div');
+  p.className='ag-panel'; p.setAttribute('role','dialog');
+  p.setAttribute('aria-label','Asistente de '+NOMBRE);
+  p.innerHTML=
+    '<div class="ag-head"><span class="dot"></span><div><div class="t">Asistente</div>'+
+      '<div class="s">'+esc(NOMBRE)+'</div></div>'+
+      '<button type="button" aria-label="Cerrar">&times;</button></div>'+
+    '<div class="ag-log" role="log" aria-live="polite"></div>'+
+    '<div class="ag-chips"></div>'+
+    '<div class="ag-foot"><form class="ag-form">'+
+      '<input type="text" maxlength="600" autocomplete="off" placeholder="Escriba su pregunta...">'+
+      '<button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button>'+
+    '</form><p class="ag-legal">Asistente virtual: orienta, no diagnostica. No escriba datos personales '+
+      'ni de salud &mdash; la conversación no se guarda. '+
+      '<a href="https://wa.me/'+WA+'" target="_blank" rel="noopener">Hablar por WhatsApp</a></p></div>';
+  document.body.appendChild(p);
+
+  var log=p.querySelector('.ag-log'), chips=p.querySelector('.ag-chips');
+  var form=p.querySelector('.ag-form'), input=form.querySelector('input');
+  var enviar=form.querySelector('button');
+  var hist=[], mios=0, ocupado=false, arrancado=false;
+
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+  // TODO lo que llega de fuera entra por aquí, y aquí solo hay textContent.
+  function pinta(clase,texto){
+    var d=document.createElement('div');
+    d.className='ag-msg '+clase; d.textContent=texto;
+    log.appendChild(d); log.scrollTop=log.scrollHeight; return d;
+  }
+  function nota(texto){
+    var d=document.createElement('p'); d.className='ag-note'; d.textContent=texto;
+    log.appendChild(d); log.scrollTop=log.scrollHeight;
+  }
+  function sugerencias(lista){
+    chips.textContent='';
+    lista.forEach(function(t){
+      var b=document.createElement('button'); b.type='button'; b.textContent=t;
+      b.onclick=function(){ chips.textContent=''; manda(t); };
+      chips.appendChild(b);
+    });
+  }
+  function aWhatsApp(){
+    chips.textContent='';
+    var b=document.createElement('button');
+    b.type='button'; b.textContent='Seguir por WhatsApp';
+    b.style.cssText='border-color:#25D366;color:#25D366';
+    b.onclick=function(){ window.open('https://wa.me/'+WA,'_blank','noopener'); };
+    chips.appendChild(b);
+    var c=document.createElement('button');
+    c.type='button'; c.textContent='Llamar '+TEL;
+    c.onclick=function(){ location.href='tel:'+TEL; };
+    chips.appendChild(c);
+  }
+
+  function manda(texto){
+    texto=(texto||'').trim().slice(0,600);
+    if(!texto||ocupado) return;
+    if(mios>=MAX_MIOS){
+      nota('Para seguir, mejor en directo con la clínica.'); aWhatsApp(); return;
+    }
+    chips.textContent='';
+    pinta('me',texto);
+    hist.push({role:'user',content:texto});
+    mios++;
+    input.value=''; ocupado=true; enviar.disabled=true;
+
+    var puntos=document.createElement('div');
+    puntos.className='ag-dots'; puntos.innerHTML='<i></i><i></i><i></i>';
+    log.appendChild(puntos); log.scrollTop=log.scrollHeight;
+
+    var ctrl=new AbortController();
+    var reloj=setTimeout(function(){ctrl.abort();},TIMEOUT);
+
+    fetch(ENDPOINT,{
+      method:'POST', signal:ctrl.signal,
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({clinic:SLUG,messages:hist.slice(-16)})
+    })
+    .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
+    .then(function(res){
+      puntos.remove();
+      if(!res.ok||!res.d||!res.d.reply){
+        pinta('err',(res.d&&typeof res.d.error==='string'?res.d.error:'')||
+          'Ahora mismo no puedo responder.');
+        aWhatsApp(); return;
+      }
+      pinta('bot',res.d.reply);
+      hist.push({role:'assistant',content:res.d.reply});
+      if(mios>=MAX_MIOS-1) aWhatsApp();
+    })
+    .catch(function(){
+      puntos.remove();
+      pinta('err','No he podido conectar. Puede escribir por WhatsApp o llamar.');
+      aWhatsApp();
+    })
+    .finally(function(){
+      clearTimeout(reloj); ocupado=false; enviar.disabled=false;
+      if(p.classList.contains('in')) input.focus();
+    });
+  }
+
+  form.addEventListener('submit',function(e){ e.preventDefault(); manda(input.value); });
+
+  function abre(){
+    // El panel se come el rincón entero, así que la columna de botones se
+    // esconde mientras está abierto: si no, WhatsApp y el teléfono quedan
+    // debajo, invisibles y sin poder pulsarse. Dentro del panel están los dos.
+    pila.style.display='none';
+    p.classList.add('open');
+    requestAnimationFrame(function(){ p.classList.add('in'); });
+    if(!arrancado){
+      arrancado=true;
+      pinta('bot',HOLA);
+      nota('Asistente automático. No sustituye una consulta.');
+      sugerencias(SUGE);
+    }
+    setTimeout(function(){ input.focus(); },260);
+  }
+  function cierra(){
+    p.classList.remove('in');
+    setTimeout(function(){ p.classList.remove('open'); pila.style.display=''; btn.focus(); },220);
+  }
+  btn.addEventListener('click',function(){
+    p.classList.contains('open')?cierra():abre();
+  });
+  p.querySelector('.ag-head button').addEventListener('click',cierra);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&p.classList.contains('open')) cierra();
+  });
+})();
+</script>
 
 <style id="fx-css">
   /* Barra de progreso: referencia constante de dónde estás en la página. */
