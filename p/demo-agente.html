@@ -870,7 +870,6 @@
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.18z"/></svg>
   </a>
 </div>
-
 <style>
   .ag-btn{background:#1D4ED8;position:relative;}
   .ag-btn::after{content:"";position:absolute;inset:0;border-radius:50%;
@@ -924,7 +923,7 @@
 </style>
 <script>
 (function(){
-  var ENDPOINT="https://agente-impulsa.PENDIENTE.workers.dev/chat", SLUG="granados", WA="34958833865", TEL="+34958833865";
+  var ENDPOINT="https://agente-impulsa.impulsawebs.workers.dev/chat", SLUG="granados", WA="34958833865", TEL="+34958833865";
   var NOMBRE="Granados";
   var MAX_MIOS=8;          // tope de turnos también aquí, no solo en el servidor
   var TIMEOUT=25000;
@@ -989,6 +988,17 @@
       chips.appendChild(b);
     });
   }
+  // Enlace de reserva (Google Calendar, etc.): llega del Worker, que lo saca
+  // de la ficha de la clínica — nunca del texto del modelo. Solo https.
+  var CITA=null;
+  function botonCita(){
+    if(!CITA) return;
+    var b=document.createElement('button');
+    b.type='button'; b.textContent='Reservar cita';
+    b.style.cssText='border-color:currentColor;font-weight:600';
+    b.onclick=function(){ window.open(CITA,'_blank','noopener'); };
+    chips.insertBefore(b,chips.firstChild);
+  }
   function aWhatsApp(){
     chips.textContent='';
     var b=document.createElement('button');
@@ -1000,6 +1010,7 @@
     c.type='button'; c.textContent='Llamar '+TEL;
     c.onclick=function(){ location.href='tel:'+TEL; };
     chips.appendChild(c);
+    botonCita();
   }
 
   function manda(texto){
@@ -1034,9 +1045,10 @@
           'Ahora mismo no puedo responder.');
         aWhatsApp(); return;
       }
+      if(typeof res.d.cita==='string'&&res.d.cita.indexOf('https://')===0) CITA=res.d.cita;
       pinta('bot',res.d.reply);
       hist.push({role:'assistant',content:res.d.reply});
-      if(mios>=MAX_MIOS-1) aWhatsApp();
+      if(mios>=MAX_MIOS-1) aWhatsApp(); else botonCita();
     })
     .catch(function(){
       puntos.remove();
