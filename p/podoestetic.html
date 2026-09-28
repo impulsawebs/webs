@@ -630,6 +630,17 @@
       chips.appendChild(b);
     });
   }
+  // Enlace de reserva (Google Calendar, etc.): llega del Worker, que lo saca
+  // de la ficha de la clínica — nunca del texto del modelo. Solo https.
+  var CITA=null;
+  function botonCita(){
+    if(!CITA) return;
+    var b=document.createElement('button');
+    b.type='button'; b.textContent='Reservar cita';
+    b.style.cssText='border-color:currentColor;font-weight:600';
+    b.onclick=function(){ window.open(CITA,'_blank','noopener'); };
+    chips.insertBefore(b,chips.firstChild);
+  }
   function aWhatsApp(){
     chips.textContent='';
     var b=document.createElement('button');
@@ -641,6 +652,7 @@
     c.type='button'; c.textContent='Llamar '+TEL;
     c.onclick=function(){ location.href='tel:'+TEL; };
     chips.appendChild(c);
+    botonCita();
   }
 
   function manda(texto){
@@ -675,9 +687,10 @@
           'Ahora mismo no puedo responder.');
         aWhatsApp(); return;
       }
+      if(typeof res.d.cita==='string'&&res.d.cita.indexOf('https://')===0) CITA=res.d.cita;
       pinta('bot',res.d.reply);
       hist.push({role:'assistant',content:res.d.reply});
-      if(mios>=MAX_MIOS-1) aWhatsApp();
+      if(mios>=MAX_MIOS-1) aWhatsApp(); else botonCita();
     })
     .catch(function(){
       puntos.remove();
